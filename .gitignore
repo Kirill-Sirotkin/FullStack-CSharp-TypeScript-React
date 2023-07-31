@@ -67,6 +67,7 @@ artifacts/
 
 # dependencies
 frontend/node_modules
+node_modules/
 
 # testing
 frontend/coverage
