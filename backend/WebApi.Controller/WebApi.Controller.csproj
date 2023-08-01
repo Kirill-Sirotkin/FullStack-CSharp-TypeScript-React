@@ -15,4 +15,9 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WebApi.Core\WebApi.Core.csproj" />
+    <ProjectReference Include="..\WebApi.Service\WebApi.Service.csproj" />
+  </ItemGroup>
+
 </Project>
