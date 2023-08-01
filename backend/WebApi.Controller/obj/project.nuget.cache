@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yzWRcP70jrpWUuW4mJlo47exYVAKlKC94rV7JvkFF9440AMbRJHNIBHAvfK2GQUmGKmbccMymp4DuhFMtZGl9Q==",
+  "dgSpecHash": "nwJx1JIEAnouB57MYMR+B0HZaesY3veAsgtJcC9ZBa2l0HkR5DILlLeXUq/1nmfF6uWCvqMq8lJlVpY0sjtCnQ==",
   "success": true,
   "projectFilePath": "D:\\Programming\\Integrify\\Fullstack\\fs15_Fullstack\\backend\\WebApi.Controller\\WebApi.Controller.csproj",
   "expectedPackageFiles": [
@@ -21,6 +21,8 @@
     "C:\\Users\\pocht\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
     "C:\\Users\\pocht\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\pocht\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\pocht\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
+    "C:\\Users\\pocht\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.4\\npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
     "C:\\Users\\pocht\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\pocht\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
     "C:\\Users\\pocht\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "T2YYwv/kE84JnDK6Y75nLj0hh+eiCFCynS73HH2+iA9w7Jtr4Y+v7jz+anhIo2SCYxiEHfEh6ywNtIsoqgd+AA==",
+  "dgSpecHash": "6CElbH2CoLilNaCsn0mGU6KcLOMqcu5hJLqo8OVpFj+oVKOOsrnufS1fq2bHu/nBhtHk4egJqaa30P+WzLJLbQ==",
   "success": true,
   "projectFilePath": "D:\\Programming\\Integrify\\Fullstack\\fs15_Fullstack\\backend\\WebApi.Infrastructure\\WebApi.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -24,6 +24,8 @@
     "C:\\Users\\pocht\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\pocht\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
     "C:\\Users\\pocht\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\pocht\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
+    "C:\\Users\\pocht\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.4\\npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
     "C:\\Users\\pocht\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\pocht\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\pocht\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
