@@ -3,8 +3,8 @@
 # User-specific files
 backend/appsettings.json
 backend/appsettings.*.json
-backend/obj/
-backend/bin/
+backend/obj
+backend/bin
 backend/*/obj
 backend/*/bin
 
@@ -93,6 +93,7 @@ frontend/package-*.json
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+.vscode
 
 # Local History for Visual Studio Code
 .history/
