@@ -1,7 +1,8 @@
 namespace WebApi.Core;
 
-class IdBase
+public abstract class IdBase
 {
-    private Guid _id = Guid.NewGuid();
-    public Guid Id { get { return _id; } }
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
