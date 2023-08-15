@@ -5,36 +5,45 @@ namespace WebApi.Service;
 public class BaseService<T, TReadDto, TCreateDto, TUpdateDto> : IBaseService<T, TReadDto, TCreateDto, TUpdateDto>
 {
     private readonly IRepository<T> _baseRepository;
-    protected readonly IMapper<T, TReadDto, TCreateDto> _mapper;
+    protected readonly IMapper<T, TReadDto, TCreateDto, TUpdateDto> _mapper;
 
-    public BaseService(IRepository<T> baseRepo, IMapper<T, TReadDto, TCreateDto> mapper)
+    public BaseService(IRepository<T> baseRepo, IMapper<T, TReadDto, TCreateDto, TUpdateDto> mapper)
     {
         _baseRepository = baseRepo;
         _mapper = mapper;
     }
 
-    public Task<TReadDto> Create(TCreateDto dto)
+    public async Task<TReadDto> Create(TCreateDto dto)
     {
-        throw new NotImplementedException();
+        return _mapper.MapToRead(await _baseRepository.Create(_mapper.MapFromCreate(dto)));
     }
 
-    public Task<bool> Delete(Guid id)
+    public async Task<bool> Delete(Guid id)
     {
-        throw new NotImplementedException();
+        return await _baseRepository.Delete(id);
     }
 
-    public Task<IEnumerable<TReadDto>> GetAll(QueryOptions queryOptions)
+    public async Task<IEnumerable<TReadDto>> GetAll(QueryOptions queryOptions)
     {
-        throw new NotImplementedException();
+        var query = await _baseRepository.GetAll(queryOptions);
+        var result = query.Select(entity => _mapper.MapToRead(entity));
+        Console.WriteLine(result.Count());
+        return result;
     }
 
-    public Task<TReadDto> GetById(Guid id)
+    public async Task<TReadDto> GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var result = await _baseRepository.GetById(id);
+        if (result is null) throw new Exception("Get by id: User not found");
+        return _mapper.MapToRead(result);
     }
 
-    public Task<TReadDto> Update(Guid id, TUpdateDto updated)
+    public async Task<TReadDto> Update(Guid id, TUpdateDto updated)
     {
-        throw new NotImplementedException();
+        var previousEntity = await _baseRepository.GetById(id);
+        if (previousEntity is null) throw new Exception("Update: User not found");
+        var newUserInfo = _mapper.MapFromUpdate(previousEntity, updated);
+        await _baseRepository.Update(newUserInfo);
+        return _mapper.MapToRead(newUserInfo);
     }
 }
