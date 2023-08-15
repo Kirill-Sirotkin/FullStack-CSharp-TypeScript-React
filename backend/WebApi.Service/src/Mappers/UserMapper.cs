@@ -2,7 +2,7 @@ using WebApi.Core;
 
 namespace WebApi.Service;
 
-public class UserMapper : IMapper<User, UserReadDto, UserCreateDto>
+public class UserMapper : IUserMapper
 {
     public UserReadDto MapToRead(User user)
     {

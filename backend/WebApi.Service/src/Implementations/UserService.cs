@@ -2,7 +2,7 @@ using WebApi.Core;
 
 namespace WebApi.Service;
 
-public class UserService : BaseService<User, UserReadDto, UserCreateDto, UserUpdateDto>
+public class UserService : BaseService<User, UserReadDto, UserCreateDto, UserUpdateDto>, IUserService
 {
-    public UserService(IUserRepository userRepo, IMapper<User, UserReadDto, UserCreateDto> mapper) : base(userRepo, mapper) { }
+    public UserService(IUserRepository userRepo, IUserMapper mapper) : base(userRepo, mapper) { }
 }
