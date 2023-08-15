@@ -2,9 +2,9 @@ using WebApi.Core;
 
 namespace WebApi.Service;
 
-public static class UserMapper
+public class UserMapper : IMapper<User, UserReadDto, UserCreateDto>
 {
-    public static UserReadDto MapToRead(User user)
+    public UserReadDto MapToRead(User user)
     {
         return new UserReadDto
         {
@@ -15,7 +15,7 @@ public static class UserMapper
         };
     }
 
-    public static User MapFromCreate(UserCreateDto user)
+    public User MapFromCreate(UserCreateDto user)
     {
         (string hashedPassword, byte[] salt) = PasswordService.HashPassword(user.Password);
         return new User

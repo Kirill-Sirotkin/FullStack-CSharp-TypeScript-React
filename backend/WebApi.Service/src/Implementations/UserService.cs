@@ -2,30 +2,7 @@ using WebApi.Core;
 
 namespace WebApi.Service;
 
-public class UserService : IUserService
+public class UserService : BaseService<User, UserReadDto, UserCreateDto, UserUpdateDto>
 {
-    public Task<UserReadDto> Create(UserCreateDto dto)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> Delete(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<UserReadDto>> GetAll(QueryOptions queryOptions)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<UserReadDto> GetById(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<UserReadDto> Update(Guid id, UserUpdateDto updated)
-    {
-        throw new NotImplementedException();
-    }
+    public UserService(IUserRepository userRepo, IMapper<User, UserReadDto, UserCreateDto> mapper) : base(userRepo, mapper) { }
 }
