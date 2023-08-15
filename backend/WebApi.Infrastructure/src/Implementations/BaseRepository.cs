@@ -3,7 +3,7 @@ using WebApi.Core;
 
 namespace WebApi.Infrastructure;
 
-public class BaseRepository<T> : IRepository<T> where T : class
+public class BaseRepository<T> : IRepository<T> where T : IdBase
 {
     private readonly DbSet<T> _dbSet;
     private readonly DatabaseContext _context;
@@ -36,7 +36,7 @@ public class BaseRepository<T> : IRepository<T> where T : class
 
     public async Task<T?> GetById(Guid id)
     {
-        return await _dbSet.FindAsync(id);
+        return await _dbSet.AsNoTracking().FirstOrDefaultAsync(entity => entity.Id == id);
     }
 
     public async Task<T> Update(T updatedEntity)
