@@ -1,41 +1,29 @@
+using Microsoft.EntityFrameworkCore;
 using WebApi.Core;
 
 namespace WebApi.Infrastructure;
 
-public class UserRepository : IUserRepository
+public class UserRepository : BaseRepository<User>, IUserRepository
 {
-    public Task<User> ChangePassword(User updatedUser)
+    private readonly DbSet<User> _users;
+    private readonly DatabaseContext _context;
+
+    public UserRepository(DatabaseContext dbContext) : base(dbContext)
     {
-        throw new NotImplementedException();
+        if (dbContext.Users is null) throw new Exception("Users table is null");
+        _users = dbContext.Users;
+        _context = dbContext;
     }
 
-    public Task<User> Create(User newEntity)
+    public async Task<User> ChangePassword(User updatedUser)
     {
-        throw new NotImplementedException();
+        _users.Update(updatedUser);
+        await _context.SaveChangesAsync();
+        return updatedUser;
     }
 
-    public Task<bool> Delete(Guid id)
+    public async Task<User?> GetByEmail(string email)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<User>> GetAll(QueryOptions options)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<User?> GetByEmail(string email)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<User?> GetById(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<User> Update(User updatedEntity)
-    {
-        throw new NotImplementedException();
+        return await _users.FirstOrDefaultAsync(u => u.Email == email);
     }
 }
