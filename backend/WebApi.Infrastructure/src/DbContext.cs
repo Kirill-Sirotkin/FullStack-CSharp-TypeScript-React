@@ -20,11 +20,13 @@ public class DatabaseContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var builder = new NpgsqlDataSourceBuilder(_configuration.GetConnectionString("DefaultConnection"));
+        builder.MapEnum<Role>();
         optionsBuilder.UseNpgsql(builder.Build());
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasPostgresEnum<Role>();
         modelBuilder.Entity<BookAuthor>().HasKey("BookId", "AuthorId");
         modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
     }

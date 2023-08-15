@@ -30,8 +30,8 @@ public class User : IdBase
         }
     }
     public Role UserRole { get; set; }
-    public string PasswordHash { get; set; } = "";
-    public string PasswordSalt { get; set; } = "";
+    public required string PasswordHash { get; set; }
+    public required byte[] PasswordSalt { get; set; }
 }
 
 public enum Role
