@@ -14,7 +14,10 @@ builder.Services
     .AddScoped<IUserService, UserService>()
     .AddScoped<IBookMapper, BookMapper>()
     .AddScoped<IBookRepository, BookRepository>()
-    .AddScoped<IBookService, BookService>();
+    .AddScoped<IBookService, BookService>()
+    .AddScoped<IAuthorMapper, AuthorMapper>()
+    .AddScoped<IAuthorRepository, AuthorRepository>()
+    .AddScoped<IAuthorService, AuthorService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
