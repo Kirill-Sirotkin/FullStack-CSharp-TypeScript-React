@@ -6,7 +6,7 @@ namespace WebApi.Infrastructure;
 public class BaseRepository<T> : IRepository<T> where T : IdBase
 {
     private readonly DbSet<T> _dbSet;
-    private readonly DatabaseContext _context;
+    protected readonly DatabaseContext _context;
     public BaseRepository(DatabaseContext dbContext)
     {
         _dbSet = dbContext.Set<T>();
@@ -29,7 +29,7 @@ public class BaseRepository<T> : IRepository<T> where T : IdBase
         return true;
     }
 
-    public async Task<IEnumerable<T>> GetAll(QueryOptions options)
+    public virtual async Task<IEnumerable<T>> GetAll(QueryOptions options)
     {
         return await _dbSet.ToArrayAsync();
     }

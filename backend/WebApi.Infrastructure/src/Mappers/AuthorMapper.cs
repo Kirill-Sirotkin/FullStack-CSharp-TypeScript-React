@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using WebApi.Core;
 using WebApi.Service;
 
@@ -13,60 +12,6 @@ public class AuthorMapper : IAuthorMapper
         _context = dbContext;
     }
 
-    public BookReadDto MapToRead(Book entity)
-    {
-        var result = new BookReadDto
-        {
-            Id = entity.Id,
-            Title = entity.Title,
-            Isbn = entity.Isbn,
-            PublishedDate = entity.PublishedDate,
-            AuthorIds = new List<Guid>(),
-            // AuthorIds = entity.Authors.Select(a => a.Id).ToList(),
-            AuthorNames = GetAuthorNames(entity.Authors),
-            Description = entity.Description,
-            Quantity = entity.Quantity
-        };
-        return result;
-    }
-
-    private List<string> GetAuthorNames(List<Author> authors)
-    {
-        if (authors is null) return new List<string>();
-        if (authors.Count < 1) return new List<string>();
-        return authors.Select(a => $"{a.FirstName} {a.LastName}").ToList();
-    }
-
-    public Book MapFromCreate(BookCreateUpdateDto entityCreate)
-    {
-        var result = new Book
-        {
-            Id = Guid.NewGuid(),
-            Title = entityCreate.Title,
-            Isbn = entityCreate.Isbn,
-            PublishedDate = entityCreate.PublishedDate,
-            Authors = _context.Authors?.Where(a => entityCreate.AuthorIds.Contains(a.Id)).ToList() ?? new List<Author>(),
-            Description = entityCreate.Description,
-            Quantity = entityCreate.Quantity
-        };
-        return result;
-    }
-
-    public Book MapFromUpdate(Book previousEntity, BookCreateUpdateDto entityUpdate)
-    {
-        var result = new Book
-        {
-            Id = previousEntity.Id,
-            Title = entityUpdate.Title,
-            Isbn = entityUpdate.Isbn,
-            PublishedDate = entityUpdate.PublishedDate,
-            Authors = _context.Authors?.Where(a => entityUpdate.AuthorIds.Contains(a.Id)).ToList() ?? new List<Author>(),
-            Description = entityUpdate.Description,
-            Quantity = entityUpdate.Quantity
-        };
-        return result;
-    }
-
     public AuthorReadDto MapToRead(Author entity)
     {
         var result = new AuthorReadDto
@@ -75,9 +20,24 @@ public class AuthorMapper : IAuthorMapper
             FirstName = entity.FirstName,
             LastName = entity.LastName,
             Biography = entity.Biography,
-            Books = entity.Books
+            BookIds = GetBookIds(entity.Books),
+            BookTitles = GetBookTitles(entity.Books)
         };
         return result;
+    }
+
+    private List<Guid> GetBookIds(List<Book> books)
+    {
+        if (books is null) return new List<Guid>();
+        if (books.Count < 1) return new List<Guid>();
+        return books.Select(b => b.Id).ToList();
+    }
+
+    private List<string> GetBookTitles(List<Book> books)
+    {
+        if (books is null) return new List<string>();
+        if (books.Count < 1) return new List<string>();
+        return books.Select(b => b.Title).ToList();
     }
 
     public Author MapFromCreate(AuthorCreateUpdateDto entityCreate)

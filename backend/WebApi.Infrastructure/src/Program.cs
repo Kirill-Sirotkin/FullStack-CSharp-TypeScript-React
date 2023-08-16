@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using WebApi.Core;
 using WebApi.Infrastructure;
 using WebApi.Service;
@@ -20,6 +21,7 @@ builder.Services
     .AddScoped<IAuthorService, AuthorService>();
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

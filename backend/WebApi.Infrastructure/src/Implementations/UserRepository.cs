@@ -6,13 +6,11 @@ namespace WebApi.Infrastructure;
 public class UserRepository : BaseRepository<User>, IUserRepository
 {
     private readonly DbSet<User> _users;
-    private readonly DatabaseContext _context;
 
     public UserRepository(DatabaseContext dbContext) : base(dbContext)
     {
         if (dbContext.Users is null) throw new Exception("Users table is null");
         _users = dbContext.Users;
-        _context = dbContext;
     }
 
     public async Task<User> ChangePassword(User updatedUser)
