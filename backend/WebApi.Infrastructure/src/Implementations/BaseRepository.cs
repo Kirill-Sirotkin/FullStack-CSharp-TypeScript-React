@@ -34,7 +34,7 @@ public class BaseRepository<T> : IRepository<T> where T : IdBase
         return await _dbSet.ToArrayAsync();
     }
 
-    public async Task<T?> GetById(Guid id)
+    public virtual async Task<T?> GetById(Guid id)
     {
         return await _dbSet.AsNoTracking().FirstOrDefaultAsync(entity => entity.Id == id);
     }

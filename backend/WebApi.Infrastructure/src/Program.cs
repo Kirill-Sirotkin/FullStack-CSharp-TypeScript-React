@@ -18,7 +18,10 @@ builder.Services
     .AddScoped<IBookService, BookService>()
     .AddScoped<IAuthorMapper, AuthorMapper>()
     .AddScoped<IAuthorRepository, AuthorRepository>()
-    .AddScoped<IAuthorService, AuthorService>();
+    .AddScoped<IAuthorService, AuthorService>()
+    .AddScoped<ILoanMapper, LoanMapper>()
+    .AddScoped<ILoanRepository, LoanRepository>()
+    .AddScoped<ILoanService, LoanService>();
 
 builder.Services.AddControllers();
 
