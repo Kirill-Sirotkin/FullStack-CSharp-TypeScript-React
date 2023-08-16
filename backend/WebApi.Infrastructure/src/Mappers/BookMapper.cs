@@ -21,13 +21,19 @@ public class BookMapper : IBookMapper
             Title = entity.Title,
             Isbn = entity.Isbn,
             PublishedDate = entity.PublishedDate,
-            AuthorIds = new List<Guid>(),
-            // AuthorIds = entity.Authors.Select(a => a.Id).ToList(),
+            AuthorIds = GetAuthorIds(entity.Authors),
             AuthorNames = GetAuthorNames(entity.Authors),
             Description = entity.Description,
             Quantity = entity.Quantity
         };
         return result;
+    }
+
+    private List<Guid> GetAuthorIds(List<Author> authors)
+    {
+        if (authors is null) return new List<Guid>();
+        if (authors.Count < 1) return new List<Guid>();
+        return authors.Select(a => a.Id).ToList();
     }
 
     private List<string> GetAuthorNames(List<Author> authors)
