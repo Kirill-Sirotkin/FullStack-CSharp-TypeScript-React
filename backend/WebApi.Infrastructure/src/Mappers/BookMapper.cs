@@ -21,12 +21,20 @@ public class BookMapper : IBookMapper
             Title = entity.Title,
             Isbn = entity.Isbn,
             PublishedDate = entity.PublishedDate,
-            AuthorId = entity.Author?.Id,
-            AuthorName = $"{entity.Author?.FirstName} {entity.Author?.LastName}",
+            AuthorIds = new List<Guid>(),
+            // AuthorIds = entity.Authors.Select(a => a.Id).ToList(),
+            AuthorNames = GetAuthorNames(entity.Authors),
             Description = entity.Description,
             Quantity = entity.Quantity
         };
         return result;
+    }
+
+    private List<string> GetAuthorNames(List<Author> authors)
+    {
+        if (authors is null) return new List<string>();
+        if (authors.Count < 1) return new List<string>();
+        return authors.Select(a => $"{a.FirstName} {a.LastName}").ToList();
     }
 
     public Book MapFromCreate(BookCreateUpdateDto entityCreate)
@@ -37,7 +45,7 @@ public class BookMapper : IBookMapper
             Title = entityCreate.Title,
             Isbn = entityCreate.Isbn,
             PublishedDate = entityCreate.PublishedDate,
-            Author = _context.Authors?.FirstOrDefault(a => a.Id == (entityCreate.AuthorId ?? Guid.Empty)),
+            Authors = _context.Authors?.Where(a => entityCreate.AuthorIds.Contains(a.Id)).ToList() ?? new List<Author>(),
             Description = entityCreate.Description,
             Quantity = entityCreate.Quantity
         };
@@ -52,7 +60,7 @@ public class BookMapper : IBookMapper
             Title = entityUpdate.Title,
             Isbn = entityUpdate.Isbn,
             PublishedDate = entityUpdate.PublishedDate,
-            Author = _context.Authors?.FirstOrDefault(a => a.Id == (entityUpdate.AuthorId ?? Guid.Empty)),
+            Authors = _context.Authors?.Where(a => entityUpdate.AuthorIds.Contains(a.Id)).ToList() ?? new List<Author>(),
             Description = entityUpdate.Description,
             Quantity = entityUpdate.Quantity
         };
