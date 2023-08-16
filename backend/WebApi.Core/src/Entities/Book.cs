@@ -8,7 +8,7 @@ public class Book : IdBase
     public required string Title { get; set; }
     public string? Isbn { get; set; }
     public DateTime PublishedDate { get; set; }
-    public Author? Author { get; set; } = null;
+    public required List<Author> Authors { get; set; }
     public string? Description { get; set; }
     public int Quantity { get; set; }
 }

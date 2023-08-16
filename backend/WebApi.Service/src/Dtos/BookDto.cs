@@ -8,8 +8,8 @@ public class BookReadDto
     public required string Title { get; init; }
     public string? Isbn { get; init; }
     public DateTime PublishedDate { get; init; }
-    public Guid? AuthorId { get; init; }
-    public string? AuthorName { get; init; }
+    public required List<Guid> AuthorIds { get; init; }
+    public required List<string> AuthorNames { get; init; }
     public string? Description { get; init; }
     public int Quantity { get; init; }
 }
@@ -19,7 +19,7 @@ public class BookCreateUpdateDto
     public required string Title { get; init; }
     public string? Isbn { get; init; }
     public DateTime PublishedDate { get; init; }
-    public Guid? AuthorId { get; init; }
+    public required List<Guid> AuthorIds { get; init; }
     public string? Description { get; init; }
     public int Quantity { get; init; }
 }
