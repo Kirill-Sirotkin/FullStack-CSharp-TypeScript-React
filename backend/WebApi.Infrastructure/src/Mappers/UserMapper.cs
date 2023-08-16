@@ -1,6 +1,7 @@
 using WebApi.Core;
+using WebApi.Service;
 
-namespace WebApi.Service;
+namespace WebApi.Infrastructure;
 
 public class UserMapper : IUserMapper
 {
