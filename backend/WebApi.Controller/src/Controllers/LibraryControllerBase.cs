@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Core;
@@ -29,7 +30,6 @@ public class LibraryControllerBase<T, TReadDto, TCreateDto, TUpdateDto> : Contro
         return Ok(await _baseService.GetById(id));
     }
 
-    [Authorize(Roles = "Admin")]
     [HttpPost]
     public virtual async Task<ActionResult<TReadDto>> Create([FromBody] TCreateDto dto)
     {
@@ -37,7 +37,6 @@ public class LibraryControllerBase<T, TReadDto, TCreateDto, TUpdateDto> : Contro
         return CreatedAtAction(nameof(Create), createdObject);
     }
 
-    [Authorize(Roles = "Admin")]
     [HttpPatch("{id:Guid}")]
     public virtual async Task<ActionResult<TReadDto>> Update([FromRoute] Guid id, [FromBody] TUpdateDto update)
     {
@@ -45,10 +44,9 @@ public class LibraryControllerBase<T, TReadDto, TCreateDto, TUpdateDto> : Contro
         return Ok(updatedObject);
     }
 
-    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:Guid}")]
     public virtual async Task<ActionResult<bool>> DeleteOneById([FromRoute] Guid id)
     {
-        return StatusCode(204, await _baseService.Delete(id));
+        return Ok(await _baseService.Delete(id));
     }
 }

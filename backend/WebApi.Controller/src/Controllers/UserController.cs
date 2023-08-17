@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Core;
@@ -12,8 +13,22 @@ public class UserController : LibraryControllerBase<User, UserReadDto, UserCreat
 
     [AllowAnonymous]
     [HttpPost]
-    public override Task<ActionResult<UserReadDto>> Create([FromBody] UserCreateDto dto)
+    public override async Task<ActionResult<UserReadDto>> Create([FromBody] UserCreateDto dto)
     {
-        return base.Create(dto);
+        return await base.Create(dto);
+    }
+
+    [HttpDelete("{id:Guid}")]
+    public override async Task<ActionResult<bool>> DeleteOneById([FromRoute] Guid id)
+    {
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        if (identity is null) return StatusCode(401, false);
+        var clientId = identity.Claims.First(c => c.Properties.First().Value == "nameid").Value;
+        var clieantRole = identity.Claims.First(c => c.Properties.First().Value == "role").Value;
+        if (clientId != id.ToString())
+        {
+            if (clieantRole != Role.Admin.ToString()) return StatusCode(403, false);
+        }
+        return await base.DeleteOneById(id);
     }
 }

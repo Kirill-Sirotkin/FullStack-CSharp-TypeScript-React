@@ -39,13 +39,9 @@ public class AuthService : IAuthService
             new Claim(ClaimTypes.Surname, user.LastName.ToString()),
             new Claim(ClaimTypes.Role, user.UserRole.ToString()),
         };
-        // var securityKey = new JsonWebKey(JsonConvert.SerializeObject(_configuration.GetSection("JwtSecret")));
         var jwtSecret = _configuration["JwtSecret"];
         if (jwtSecret is null) throw new Exception("No secret was found in appsettings");
         var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSecret));
-        // var securityKey = new RsaSecurityKey(new RSAParameters());
-        Console.WriteLine(Encoding.ASCII.GetBytes(jwtSecret));
-        Console.WriteLine(jwtSecret);
         var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
         var securityTokenDescriptor = new SecurityTokenDescriptor
         {
@@ -57,8 +53,5 @@ public class AuthService : IAuthService
         var token = jwtSecurityTokenHandler.CreateJwtSecurityToken(securityTokenDescriptor);
         if (token is null) throw new Exception("No token was returned");
         return token.RawData;
-        // var stringToken = token.ToString();
-        // if (stringToken is null) throw new Exception("Token could not be converted to string");
-        // return stringToken;
     }
 }

@@ -27,7 +27,6 @@ public class BaseService<T, TReadDto, TCreateDto, TUpdateDto> : IBaseService<T, 
     {
         var query = await _baseRepository.GetAll(queryOptions);
         var result = query.Select(entity => _mapper.MapToRead(entity));
-        Console.WriteLine(result.Count());
         return result;
     }
 
