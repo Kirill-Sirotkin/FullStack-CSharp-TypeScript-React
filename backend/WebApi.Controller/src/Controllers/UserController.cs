@@ -19,16 +19,16 @@ public class UserController : LibraryControllerBase<User, UserReadDto, UserCreat
     }
 
     [HttpDelete("{id:Guid}")]
-    public override async Task<ActionResult<bool>> DeleteOneById([FromRoute] Guid id)
+    public override async Task<ActionResult<bool>> Delete([FromRoute] Guid id)
     {
-        var identity = HttpContext.User.Identity as ClaimsIdentity;
-        if (identity is null) return StatusCode(401, false);
-        var clientId = identity.Claims.First(c => c.Properties.First().Value == "nameid").Value;
-        var clieantRole = identity.Claims.First(c => c.Properties.First().Value == "role").Value;
-        if (clientId != id.ToString())
-        {
-            if (clieantRole != Role.Admin.ToString()) return StatusCode(403, false);
-        }
-        return await base.DeleteOneById(id);
+        var (idVerified, roleVerified) = VerificationService.VerifyIdAndRole(
+            HttpContext.User.Identity as ClaimsIdentity,
+            id,
+            new string[] { "Admin" }
+        );
+
+        if (!idVerified)
+            if (!roleVerified) return StatusCode(403, false);
+        return await base.Delete(id);
     }
 }

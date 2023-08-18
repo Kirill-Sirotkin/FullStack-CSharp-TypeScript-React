@@ -10,7 +10,7 @@ namespace WebApi.Controller;
 [Route("api/v1/[controller]s")]
 public class LibraryControllerBase<T, TReadDto, TCreateDto, TUpdateDto> : ControllerBase
 {
-    private readonly IBaseService<T, TReadDto, TCreateDto, TUpdateDto> _baseService;
+    protected readonly IBaseService<T, TReadDto, TCreateDto, TUpdateDto> _baseService;
 
     public LibraryControllerBase(IBaseService<T, TReadDto, TCreateDto, TUpdateDto> baseService)
     {
@@ -45,7 +45,7 @@ public class LibraryControllerBase<T, TReadDto, TCreateDto, TUpdateDto> : Contro
     }
 
     [HttpDelete("{id:Guid}")]
-    public virtual async Task<ActionResult<bool>> DeleteOneById([FromRoute] Guid id)
+    public virtual async Task<ActionResult<bool>> Delete([FromRoute] Guid id)
     {
         return Ok(await _baseService.Delete(id));
     }
