@@ -26,7 +26,7 @@ public class UserMapper : IUserMapper
             FirstName = user.FirstName,
             LastName = user.LastName,
             Email = user.Email,
-            UserRole = user.Role,
+            UserRole = Role.Customer,
             PasswordHash = hashedPassword,
             PasswordSalt = salt
         };
