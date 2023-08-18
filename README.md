@@ -11,7 +11,7 @@
 #### App deployed at https://lirbarymanagementproject.azurewebsites.net/
 
 For example, you can get the books with the following GET request: https://lirbarymanagementproject.azurewebsites.net/api/v1/Books
-**(does not work at the moment due to database connection issues)**
+(should return code 200 with an empty array as there are no book in the databse yet)
 
 Alternatively, you can use the Swagger UI to access the API:
 
