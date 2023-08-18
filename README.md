@@ -8,6 +8,11 @@
 ![EF Core](https://img.shields.io/badge/EF%20Core-v.7-cyan)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-v.14-drakblue)
 
+#### App deployed at https://lirbarymanagementproject.azurewebsites.net/
+
+For example, you can get the books with the following GET request: https://lirbarymanagementproject.azurewebsites.net/api/v1/Books
+**(does not work at the moment due to database connection issues)**
+
 Welcome to Library management system!
 This is a fullstack project that allows a user to interact with a library. It works with a ASP.NET Core backend and React frontend.
 
