@@ -11,12 +11,14 @@ public class BookController : LibraryControllerBase<Book, BookReadDto, BookCreat
     public BookController(IBookService baseService) : base(baseService) { }
 
     [AllowAnonymous]
+    [HttpGet]
     public override async Task<ActionResult<IEnumerable<BookReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
     {
         return await base.GetAll(queryOptions);
     }
 
     [AllowAnonymous]
+    [HttpGet("{id:Guid}")]
     public override async Task<ActionResult<BookReadDto>> GetById([FromRoute] Guid id)
     {
         return await base.GetById(id);

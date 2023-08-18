@@ -11,12 +11,14 @@ public class AuthorController : LibraryControllerBase<Author, AuthorReadDto, Aut
     public AuthorController(IAuthorService baseService) : base(baseService) { }
 
     [AllowAnonymous]
+    [HttpGet]
     public override async Task<ActionResult<IEnumerable<AuthorReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
     {
         return await base.GetAll(queryOptions);
     }
 
     [AllowAnonymous]
+    [HttpGet("{id:Guid}")]
     public override async Task<ActionResult<AuthorReadDto>> GetById([FromRoute] Guid id)
     {
         return await base.GetById(id);

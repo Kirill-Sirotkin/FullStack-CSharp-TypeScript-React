@@ -11,6 +11,7 @@ public class LoanController : LibraryControllerBase<Loan, LoanReadDto, LoanCreat
 {
     public LoanController(ILoanService baseService) : base(baseService) { }
 
+    [HttpPost]
     public override async Task<ActionResult<LoanReadDto>> Create([FromBody] LoanCreateUpdateDto dto)
     {
         var (idVerified, roleVerified) = VerificationService.VerifyIdAndRole(
@@ -24,6 +25,7 @@ public class LoanController : LibraryControllerBase<Loan, LoanReadDto, LoanCreat
         return await base.Create(dto);
     }
 
+    [HttpGet("{id:Guid}")]
     public override async Task<ActionResult<LoanReadDto>> GetById([FromRoute] Guid id)
     {
         var loan = await _baseService.GetById(id);
@@ -40,18 +42,21 @@ public class LoanController : LibraryControllerBase<Loan, LoanReadDto, LoanCreat
     }
 
     [Authorize(Roles = "Admin, Librarian")]
+    [HttpGet]
     public override async Task<ActionResult<IEnumerable<LoanReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
     {
         return await base.GetAll(queryOptions);
     }
 
     [Authorize(Roles = "Admin, Librarian")]
+    [HttpPatch("{id:Guid}")]
     public override async Task<ActionResult<LoanReadDto>> Update([FromRoute] Guid id, [FromBody] LoanCreateUpdateDto update)
     {
         return await base.Update(id, update);
     }
 
     [Authorize(Roles = "Admin, Librarian")]
+    [HttpDelete("{id:Guid}")]
     public override async Task<ActionResult<bool>> Delete([FromRoute] Guid id)
     {
         return await base.Delete(id);
