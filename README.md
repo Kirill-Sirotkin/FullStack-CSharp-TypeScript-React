@@ -13,7 +13,12 @@
 For example, you can get the books with the following GET request: https://lirbarymanagementproject.azurewebsites.net/api/v1/Books
 **(does not work at the moment due to database connection issues)**
 
-Welcome to Library management system!
+Alternatively, you can use the Swagger UI to access the API:
+
+https://lirbarymanagementproject.azurewebsites.net/swagger/index.html
+
+### Welcome to Library management system!
+
 This is a fullstack project that allows a user to interact with a library. It works with a ASP.NET Core backend and React frontend.
 
 Below you can find several diagrams which describe the projects structure and design.
