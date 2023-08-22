@@ -8,7 +8,7 @@
 ![EF Core](https://img.shields.io/badge/EF%20Core-v.7-cyan)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-v.14-drakblue)
 
-#### App deployed at https://lirbarymanagementproject.azurewebsites.net/
+#### Backend API deployed at https://lirbarymanagementproject.azurewebsites.net/
 
 For example, you can get the books with the following GET request: https://lirbarymanagementproject.azurewebsites.net/api/v1/Books
 (should return code 200 with an empty array as there are no book in the databse yet)
@@ -16,6 +16,8 @@ For example, you can get the books with the following GET request: https://lirba
 Alternatively, you can use the Swagger UI to access the API:
 
 https://lirbarymanagementproject.azurewebsites.net/swagger/index.html
+
+#### Frontend webste deployed at https://joyful-alpaca-151cb2.netlify.app/
 
 ### Welcome to Library management system!
 
