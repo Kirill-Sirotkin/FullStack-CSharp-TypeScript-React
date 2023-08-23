@@ -1,11 +1,13 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Core;
 using WebApi.Service;
 
 namespace WebApi.Controller;
 
+[EnableCors]
 [ApiController]
 [Route("api/v1/[controller]s")]
 public class LibraryControllerBase<T, TReadDto, TCreateDto, TUpdateDto> : ControllerBase

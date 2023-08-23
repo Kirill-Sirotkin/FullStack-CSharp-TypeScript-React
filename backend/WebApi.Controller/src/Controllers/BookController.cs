@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Core;
 using WebApi.Service;
 
 namespace WebApi.Controller;
 
+[EnableCors]
 [Authorize(Roles = "Admin, Librarian")]
 public class BookController : LibraryControllerBase<Book, BookReadDto, BookCreateUpdateDto, BookCreateUpdateDto>
 {

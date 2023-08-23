@@ -1,11 +1,13 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Core;
 using WebApi.Service;
 
 namespace WebApi.Controller;
 
+[EnableCors]
 [Authorize]
 public class UserController : LibraryControllerBase<User, UserReadDto, UserCreateDto, UserUpdateDto>
 {
