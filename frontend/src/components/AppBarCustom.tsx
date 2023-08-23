@@ -20,7 +20,7 @@ const AppBarCustom = () => {
     const props = {sideBarActive, setSideBarActive};
 
     return (
-      <div className="appBar">
+      <div className="appBar prevent-select">
         <FontAwesomeIcon icon={faBars} className="buttonHighlight" style={{color: "#ecdfaf", backgroundColor: "inherit"}}
         onClick={() => setSideBarActive(!sideBarActive)} />
         LIBRARY

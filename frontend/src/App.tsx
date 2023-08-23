@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import Books from './pages/Books'
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import store from './store/store'
+import { Provider } from 'react-redux'
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,9 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   )
 }
 
