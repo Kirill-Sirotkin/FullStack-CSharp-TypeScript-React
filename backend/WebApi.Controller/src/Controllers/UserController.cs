@@ -7,7 +7,6 @@ using WebApi.Service;
 
 namespace WebApi.Controller;
 
-[EnableCors]
 [Authorize]
 public class UserController : LibraryControllerBase<User, UserReadDto, UserCreateDto, UserUpdateDto>
 {

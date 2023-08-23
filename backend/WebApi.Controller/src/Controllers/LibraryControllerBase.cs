@@ -7,7 +7,6 @@ using WebApi.Service;
 
 namespace WebApi.Controller;
 
-[EnableCors]
 [ApiController]
 [Route("api/v1/[controller]s")]
 public class LibraryControllerBase<T, TReadDto, TCreateDto, TUpdateDto> : ControllerBase

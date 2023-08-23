@@ -6,7 +6,6 @@ using WebApi.Service;
 
 namespace WebApi.Controller;
 
-[EnableCors]
 [Authorize(Roles = "Admin, Librarian")]
 public class AuthorController : LibraryControllerBase<Author, AuthorReadDto, AuthorCreateUpdateDto, AuthorCreateUpdateDto>
 {

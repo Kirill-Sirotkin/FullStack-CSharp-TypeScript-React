@@ -7,7 +7,6 @@ using WebApi.Service;
 
 namespace WebApi.Controller;
 
-[EnableCors]
 [Authorize]
 public class LoanController : LibraryControllerBase<Loan, LoanReadDto, LoanCreateUpdateDto, LoanCreateUpdateDto>
 {

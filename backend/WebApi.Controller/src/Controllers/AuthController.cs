@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Service;
 
-[EnableCors]
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
