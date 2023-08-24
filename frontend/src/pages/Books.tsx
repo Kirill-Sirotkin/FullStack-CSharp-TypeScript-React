@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import useAppDispatch from "../hooks/useAppDispatch";
 import { getBooks } from "../reducers/bookReducer";
 import useAppSelector from "../hooks/useAppSelector";
+import BookCard from "../components/BookCard";
 
 const Books = () => {
     const books = useAppSelector(state => state.bookReducer);
@@ -11,14 +12,15 @@ const Books = () => {
         dispatch(getBooks());
     }, [dispatch])
 
+    const bookCards = books.books.map((book) => 
+        <BookCard {...book} />
+    );
+
     return (
-        <div>
-            {books.books.map(book => (
-                <div>
-                    {book.id} - {book.title}
-                    <br></br>
-                </div>
-            ))}
+        <div className="books">
+            <div className="book-grid">
+                {bookCards}
+            </div>
         </div>
     )
 }

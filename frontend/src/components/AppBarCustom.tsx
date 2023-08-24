@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 interface Props { sideBarActive: boolean, setSideBarActive: React.Dispatch<React.SetStateAction<boolean>> }
 const SideBar = ({sideBarActive, setSideBarActive}: Props) => {
   if (sideBarActive) return (
-    <div className="sideBar">
-      <div style={{backgroundColor: "inherit"}}><Link className="buttonHighlight" style={{backgroundColor: "inherit"}} to={"/"} onClick={() => setSideBarActive(!sideBarActive)}>Home</Link></div>
-      <div style={{backgroundColor: "inherit"}}><Link className="buttonHighlight" style={{backgroundColor: "inherit"}} to={"/books"} onClick={() => setSideBarActive(!sideBarActive)}>Books</Link></div>
+    <div className="side-bar">
+      <div style={{backgroundColor: "inherit"}}><Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/"} onClick={() => setSideBarActive(!sideBarActive)}>Home</Link></div>
+      <div style={{backgroundColor: "inherit"}}><Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/books"} onClick={() => setSideBarActive(!sideBarActive)}>Books</Link></div>
     </div>
   )
   return (null)
@@ -20,11 +20,11 @@ const AppBarCustom = () => {
     const props = {sideBarActive, setSideBarActive};
 
     return (
-      <div className="appBar prevent-select">
-        <FontAwesomeIcon icon={faBars} className="buttonHighlight" style={{color: "#ecdfaf", backgroundColor: "inherit"}}
+      <div className="app-bar prevent-select">
+        <FontAwesomeIcon icon={faBars} className="button-highlight" style={{color: "#ecdfaf", backgroundColor: "inherit"}}
         onClick={() => setSideBarActive(!sideBarActive)} />
         LIBRARY
-        <div className="loginButton">Log in</div>
+        <div className="login-button">Log in</div>
         <SideBar {...props} />
       </div>
     )
