@@ -81,7 +81,9 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.UseCors(builder => builder
-     .AllowAnyOrigin());
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 app.UseAuthentication();
 
