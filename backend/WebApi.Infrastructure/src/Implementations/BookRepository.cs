@@ -12,4 +12,13 @@ public class BookRepository : BaseRepository<Book>, IBookRepository
         if (_context.Books is not null) return await _context.Books.Include(b => b.Authors).ToArrayAsync();
         return Array.Empty<Book>();
     }
+
+    public override async Task<Book?> GetById(Guid id)
+    {
+        if (_context.Books is not null) return await _context.Books
+            .AsNoTracking()
+            .Include(b => b.Authors)
+            .FirstOrDefaultAsync(entity => entity.Id == id);
+        return null;
+    }
 }
