@@ -1,43 +1,41 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import Book from "../types/Book";
+import Author from "../types/Author";
 import axios, { AxiosError } from "axios";
 
-interface BookReducer {
-  books: Book[];
-  bookById: Book;
+interface AuthorReducer {
+  authors: Author[];
+  authorById: Author;
 }
 
-const initialState: BookReducer = {
-  books: [],
-  bookById: {
+const initialState: AuthorReducer = {
+  authors: [],
+  authorById: {
     id: "",
-    title: "",
-    isbn: "",
-    description: "",
-    publishedDate: "",
-    authorNames: [],
-    authorIds: [],
-    quantity: 0,
+    firstName: "",
+    lastName: "",
+    biography: "",
+    bookTitles: [],
+    bookIds: [],
   },
 };
 
-const bookSlice = createSlice({
-  name: "books",
+const authorSlice = createSlice({
+  name: "authors",
   initialState: initialState,
   reducers: {},
   extraReducers: (build) => {
-    build.addCase(getBooks.fulfilled, (state, action) => {
+    build.addCase(getAuthors.fulfilled, (state, action) => {
       if (action.payload instanceof AxiosError) {
         console.log(action.payload.message);
       } else {
-        state.books = action.payload;
+        state.authors = action.payload;
       }
     });
-    build.addCase(getBookById.fulfilled, (state, action) => {
+    build.addCase(getAuthorById.fulfilled, (state, action) => {
       if (action.payload instanceof AxiosError) {
         console.log(action.payload.message);
       } else {
-        state.bookById = action.payload;
+        state.authorById = action.payload;
       }
     });
     // build.addCase(createProduct.fulfilled, (state, action) => {
@@ -66,10 +64,10 @@ const bookSlice = createSlice({
   },
 });
 
-export const getBooks = createAsyncThunk("getBooks", async () => {
+export const getAuthors = createAsyncThunk("getAuthors", async () => {
   try {
-    const result = await axios.get<Book[]>(
-      "https://lirbarymanagementproject.azurewebsites.net/api/v1/Books"
+    const result = await axios.get<Author[]>(
+      "https://lirbarymanagementproject.azurewebsites.net/api/v1/Authors"
     );
     return result.data;
   } catch (e) {
@@ -78,12 +76,12 @@ export const getBooks = createAsyncThunk("getBooks", async () => {
   }
 });
 
-export const getBookById = createAsyncThunk(
-  "getBookById",
+export const getAuthorById = createAsyncThunk(
+  "getAuthorById",
   async (id: string) => {
     try {
-      const result = await axios.get<Book>(
-        `https://lirbarymanagementproject.azurewebsites.net/api/v1/Books/${id}`
+      const result = await axios.get<Author>(
+        `https://lirbarymanagementproject.azurewebsites.net/api/v1/Authors/${id}`
       );
       return result.data;
     } catch (e) {
@@ -140,7 +138,7 @@ export const getBookById = createAsyncThunk(
 //   }
 // );
 
-const bookReducer = bookSlice.reducer;
+const authorReducer = authorSlice.reducer;
 // export const { sortProducts, setProductsOnPage, resetDeleteStatus } =
 //     bookSlice.actions;
-export default bookReducer;
+export default authorReducer;

@@ -67,13 +67,13 @@ code {
   padding: 1.5em 2.5em;
 }
 
-.books {
+.fetched-items {
   display: flex;
   justify-content: center;
   margin-top: 25px;
 }
 
-.book-grid {
+.items-grid {
   display: grid;
   justify-content: center;
   gap: 1em;
@@ -81,8 +81,9 @@ code {
   max-width: 100px;
 }
 
-.book-grid-element {
+.items-grid-element {
   width: 275px;
   height: 225px;
   background-color: rgb(21, 40, 25);
+  padding: 10px;
 }

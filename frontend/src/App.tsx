@@ -6,6 +6,9 @@ import Books from './pages/Books'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import store from './store/store'
 import { Provider } from 'react-redux'
+import Book from './pages/Book'
+import Authors from './pages/Authors'
+import Author from './pages/Author'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,18 @@ const router = createBrowserRouter([
       {
         path: "/books",
         element: <Books />,
+      },
+      {
+        path: "/books/:id",
+        element: <Book />,
+      },
+      {
+        path: "/authors",
+        element: <Authors />,
+      },
+      {
+        path: "/authors/:id",
+        element: <Author />,
       },
       ]
   },

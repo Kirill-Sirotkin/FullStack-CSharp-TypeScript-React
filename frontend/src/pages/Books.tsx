@@ -13,12 +13,12 @@ const Books = () => {
     }, [dispatch])
 
     const bookCards = books.books.map((book) => 
-        <BookCard {...book} />
+        <BookCard key={book.id} {...book} />
     );
 
     return (
-        <div className="books">
-            <div className="book-grid">
+        <div className="fetched-items">
+            <div className="items-grid">
                 {bookCards}
             </div>
         </div>
