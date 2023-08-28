@@ -17,7 +17,7 @@ const Books = () => {
     );
 
     return (
-        <div className="fetched-items">
+        <div className="centered-wrapper">
             <div className="items-grid">
                 {bookCards}
             </div>

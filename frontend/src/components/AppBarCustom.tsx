@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import useAppSelector from "../hooks/useAppSelector";
+import User from "../types/User";
 
 interface Props { sideBarActive: boolean, setSideBarActive: React.Dispatch<React.SetStateAction<boolean>> }
 const SideBar = ({sideBarActive, setSideBarActive}: Props) => {
@@ -16,16 +18,35 @@ const SideBar = ({sideBarActive, setSideBarActive}: Props) => {
   return (null)
 }
 
+interface PropsProfile { user: User; setSideBarActive: React.Dispatch<React.SetStateAction<boolean>> }
+const LoginProfile = (props: PropsProfile) => {
+  if (props.user.id === "") return (
+    <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/auth"} onClick={() => {
+      props.setSideBarActive(false);
+      }} >Log in</Link>
+  )
+
+  return (
+    <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={`/profile/${props.user.id}`} onClick={() => {
+      props.setSideBarActive(false);
+      }} >Profile</Link>
+  )
+}
+
 const AppBarCustom = () => {
     const [sideBarActive, setSideBarActive] = useState(false);
+    const user = useAppSelector(state => state.userReducer);
     const props = {sideBarActive, setSideBarActive};
+    const propsProfile = {user: user.currentUser, setSideBarActive};
 
     return (
       <div className="app-bar prevent-select">
         <FontAwesomeIcon icon={faBars} className="button-highlight" style={{color: "#ecdfaf", backgroundColor: "inherit"}}
         onClick={() => setSideBarActive(!sideBarActive)} />
         LIBRARY
-        <div className="login-button">Log in</div>
+        <div className="login-button">
+          <LoginProfile {...propsProfile} />
+        </div>
         <SideBar {...props} />
       </div>
     )

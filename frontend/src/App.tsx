@@ -9,6 +9,9 @@ import { Provider } from 'react-redux'
 import Book from './pages/Book'
 import Authors from './pages/Authors'
 import Author from './pages/Author'
+import Authentication from './pages/Authentication'
+import Profile from './pages/Profile'
+import Registration from './pages/Registration'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: "/authors/:id",
         element: <Author />,
+      },
+      {
+        path: "/auth",
+        element: <Authentication />,
+      },
+      {
+        path: "/register",
+        element: <Registration />,
+      },
+      {
+        path: "/profile/:id",
+        element: <Profile />,
       },
       ]
   },

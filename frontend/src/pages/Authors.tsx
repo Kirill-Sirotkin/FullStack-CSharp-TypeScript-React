@@ -17,7 +17,7 @@ const Authors = () => {
     );
 
     return (
-        <div className="fetched-items">
+        <div className="centered-wrapper">
             <div className="items-grid">
                 {authorCards}
             </div>

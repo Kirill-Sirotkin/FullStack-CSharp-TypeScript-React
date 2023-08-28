@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import useAppSelector from "../hooks/useAppSelector";
 import useAppDispatch from "../hooks/useAppDispatch";
-import avatar from "./../media/avatar_placeholder.png"
+import avatar from "./../media/avatar_placeholder.png";
 import { getAuthorById } from "../reducers/authorReducer";
 
 const Author = () => {
