@@ -124,11 +124,11 @@ export const updateBook = createAsyncThunk(
       headers: {
         Authorization: `Bearer ${updateInfo.idAndToken.token}`,
       },
-      data: updateInfo.book,
     };
     try {
       const result = await axios.patch<Book>(
         `https://lirbarymanagementproject.azurewebsites.net/api/v1/Books/${updateInfo.idAndToken.id}`,
+        updateInfo.book,
         config
       );
       return result.data;

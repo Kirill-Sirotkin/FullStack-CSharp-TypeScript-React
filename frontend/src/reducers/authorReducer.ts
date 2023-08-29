@@ -122,11 +122,11 @@ export const updateAuthor = createAsyncThunk(
       headers: {
         Authorization: `Bearer ${updateInfo.idAndToken.token}`,
       },
-      data: updateInfo.author,
     };
     try {
       const result = await axios.patch<Author>(
         `https://lirbarymanagementproject.azurewebsites.net/api/v1/Authors/${updateInfo.idAndToken.id}`,
+        updateInfo.author,
         config
       );
       return result.data;

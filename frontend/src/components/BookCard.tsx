@@ -35,7 +35,7 @@ const BookCard = (book: Book) => {
       isbn: inputIsbn,
       description: book.description,
       publishedDate: book.publishedDate,
-      authorIds: book.authorIds,
+      authorIds: [],
       quantity: inputQuantity
     }
     const token = localStorage.getItem("token");
