@@ -10,7 +10,7 @@ interface Props {
  }
 const AdminButtons = (props: Props) => {
     if (props.user.role === 0) return (
-        <div style={{backgroundColor: "inherit", margin:"5px 0 0 225px"}}>
+        <div style={{backgroundColor: "inherit"}}>
         <FontAwesomeIcon icon={faPenToSquare} className="button-highlight" 
             style={{
             color: "#c2c2c2", 

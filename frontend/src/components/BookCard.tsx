@@ -7,6 +7,7 @@ import useAppDispatch from "../hooks/useAppDispatch";
 import { deleteBook, getBooks, updateBook } from "../reducers/bookReducer";
 import { useState } from "react";
 import BookCreateUpdateInfo from "../types/BookCreateUpdateInfo";
+import { addProductToCart } from "../reducers/cartReducer";
 
 const BookCard = (book: Book) => {
   const user = useAppSelector(state => state.userReducer);
@@ -61,7 +62,14 @@ const BookCard = (book: Book) => {
       By {book.authorNames[0]}{book.authorNames.length > 1 ? <span style={{backgroundColor: "inherit"}}>, et al</span> : null}
       <br/>
       Available to borrow: {book.quantity}
-      <AdminButtons {...{user: user.currentUser, updateFunction: updateBookClick, deleteFunction: deleteBookClick, itemId: book.id}} />
+      <div style={{backgroundColor: "inherit", display: "flex", justifyContent: "space-between"}}>
+        {user.currentUser.id !== "" ? 
+          <div style={{backgroundColor: "inherit"}}>
+            <button onClick={() => dispatch(addProductToCart(book))}>Add to cart</button>
+          </div>
+        : null}
+        <AdminButtons {...{user: user.currentUser, updateFunction: updateBookClick, deleteFunction: deleteBookClick, itemId: book.id}} />
+      </div>
     </div>
   )
 

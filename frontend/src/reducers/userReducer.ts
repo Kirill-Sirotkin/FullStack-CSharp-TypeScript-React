@@ -9,6 +9,7 @@ import IdAndToken from "../types/IdAndToken";
 interface UserReducer {
   token: string;
   currentUser: User;
+  viewableUser: User;
   users: User[];
   loading: boolean;
   errorMessageLogin: string;
@@ -28,6 +29,7 @@ const initialState: UserReducer = {
   users: [],
   token: "",
   currentUser: emptyUser,
+  viewableUser: emptyUser,
   errorMessageLogin: "",
   errorMessageRegister: "",
 };
@@ -70,6 +72,14 @@ const userSlice = createSlice({
         console.log(action.payload);
       } else {
         state.currentUser = action.payload;
+        state.errorMessageLogin = "";
+      }
+    });
+    build.addCase(getUserViewableById.fulfilled, (state, action) => {
+      if (action.payload instanceof AxiosError) {
+        console.log(action.payload);
+      } else {
+        state.viewableUser = action.payload;
         state.errorMessageLogin = "";
       }
     });
@@ -147,6 +157,27 @@ export const getUsers = createAsyncThunk(
 
 export const getUserById = createAsyncThunk(
   "getUserById",
+  async (credentials: IdAndToken) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${credentials.token}`,
+      },
+    };
+    try {
+      const result = await axios.get<User>(
+        `https://lirbarymanagementproject.azurewebsites.net/api/v1/Users/${credentials.id}`,
+        config
+      );
+      return result.data;
+    } catch (e) {
+      const error = e as AxiosError;
+      return error;
+    }
+  }
+);
+
+export const getUserViewableById = createAsyncThunk(
+  "getUserViewableById",
   async (credentials: IdAndToken) => {
     const config = {
       headers: {

@@ -14,6 +14,8 @@ import Profile from './pages/Profile'
 import Registration from './pages/Registration'
 import Users from './pages/Users'
 import Loans from './pages/Loans'
+import Cart from './pages/Cart'
+import User from './pages/User'
 
 const router = createBrowserRouter([
   {
@@ -58,8 +60,16 @@ const router = createBrowserRouter([
         element: <Users />,
       },
       {
+        path: "/users/:id",
+        element: <User />,
+      },
+      {
         path: "/loans",
         element: <Loans />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       ]
   },

@@ -5,6 +5,7 @@ import useAppDispatch from "../hooks/useAppDispatch";
 import avatar from "./../media/avatar_placeholder.png";
 import { getUserById, logOutUser } from "../reducers/userReducer";
 import UserRoles from "../types/UserRoles";
+import { clearCart } from "../reducers/cartReducer";
 
 const Profile = () => {
     const {id} = useParams();
@@ -20,6 +21,7 @@ const Profile = () => {
     
     const logOut = async () => {
         await dispatch(logOutUser());
+        dispatch(clearCart());
         navigate("/");
     }
 

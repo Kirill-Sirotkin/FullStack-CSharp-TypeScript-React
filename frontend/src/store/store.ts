@@ -4,6 +4,7 @@ import bookReducer from "../reducers/bookReducer";
 import authorReducer from "../reducers/authorReducer";
 import userReducer from "../reducers/userReducer";
 import loanReducer from "../reducers/loanReducer";
+import cartReducer from "../reducers/cartReducer";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     authorReducer: authorReducer,
     userReducer: userReducer,
     loanReducer: loanReducer,
+    cartReducer: cartReducer,
   },
 });
 

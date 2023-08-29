@@ -46,7 +46,7 @@ const UserCard = (userInfo: User) => {
     <div key={userInfo.id} className="items-grid-element">
       <img alt="avatar" src={avatar} style={{width: "80px", height: "80px"}} />
       <div style={{backgroundColor: "inherit"}}>
-          <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={`/profile/${userInfo.id}`}>
+          <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={`/users/${userInfo.id}`}>
             {userInfo.firstName} {userInfo.lastName}
           </Link>
       </div>

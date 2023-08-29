@@ -42,14 +42,13 @@ const loanSlice = createSlice({
         state.loanById = action.payload;
       }
     });
-    // build.addCase(createProduct.fulfilled, (state, action) => {
-    //   if (action.payload instanceof AxiosError) {
-    //     console.log(action.payload.message);
-    //     state.createResultMessage = action.payload.message;
-    //   } else {
-    //     state.createdProduct = action.payload;
-    //   }
-    // });
+    build.addCase(createLoan.fulfilled, (state, action) => {
+      if (action.payload instanceof AxiosError) {
+        console.log(action.payload.message);
+      } else {
+        console.log(action.payload);
+      }
+    });
     build.addCase(updateLoan.fulfilled, (state, action) => {
       if (action.payload instanceof AxiosError) {
         console.log(action.payload.message);
@@ -111,21 +110,27 @@ export const getLoanById = createAsyncThunk(
   }
 );
 
-// export const createProduct = createAsyncThunk(
-//   "createProduct",
-//   async (product: ProductCreateInfo) => {
-//     try {
-//       const result = await axios.post<Product>(
-//         "https://api.escuelajs.co/api/v1/products/",
-//         product
-//       );
-//       return result.data;
-//     } catch (e) {
-//       const error = e as AxiosError;
-//       return error;
-//     }
-//   }
-// );
+export const createLoan = createAsyncThunk(
+  "createLoan",
+  async (createInfo: { loan: LoanCreateUpdateInfo; token: string }) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${createInfo.token}`,
+      },
+    };
+    try {
+      const result = await axios.post<Loan>(
+        "https://lirbarymanagementproject.azurewebsites.net/api/v1/Loans",
+        createInfo.loan,
+        config
+      );
+      return result.data;
+    } catch (e) {
+      const error = e as AxiosError;
+      return error;
+    }
+  }
+);
 
 export const updateLoan = createAsyncThunk(
   "updateLoan",

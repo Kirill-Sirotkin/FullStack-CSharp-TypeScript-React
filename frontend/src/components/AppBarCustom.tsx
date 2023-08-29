@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import useAppSelector from "../hooks/useAppSelector";
 import User from "../types/User";
+import { getTotal } from "../reducers/cartReducer";
 
 interface Props { sideBarActive: boolean, setSideBarActive: React.Dispatch<React.SetStateAction<boolean>> }
 const SideBar = ({sideBarActive, setSideBarActive}: Props) => {
@@ -36,6 +37,7 @@ const LoginProfile = (props: PropsProfile) => {
 const AppBarCustom = () => {
     const [sideBarActive, setSideBarActive] = useState(false);
     const user = useAppSelector(state => state.userReducer);
+    const cart = useAppSelector(state => state.cartReducer);
     const props = {sideBarActive, setSideBarActive};
     const propsProfile = {user: user.currentUser, setSideBarActive};
 
@@ -44,6 +46,16 @@ const AppBarCustom = () => {
         <FontAwesomeIcon icon={faBars} className="button-highlight" style={{color: "#ecdfaf", backgroundColor: "inherit"}}
         onClick={() => setSideBarActive(!sideBarActive)} />
         LIBRARY
+        {user.currentUser.id !== "" ? 
+          <div className="cart-icon">
+            <Link style={{backgroundColor: "inherit"}} to={"/cart"}>
+              <FontAwesomeIcon icon={faCartShopping} className="button-highlight" style={{color: "#bbbfbb", backgroundColor: "inherit"}} />
+            </Link>
+            {getTotal(cart.products) > 0 ? getTotal(cart.products) : null}
+          </div>
+          :
+          null
+        }
         <div className="login-button">
           <LoginProfile {...propsProfile} />
         </div>

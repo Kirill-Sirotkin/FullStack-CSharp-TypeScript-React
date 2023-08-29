@@ -7,6 +7,8 @@ public class LoanRepository : BaseRepository<Loan>, ILoanRepository
 {
     public LoanRepository(DatabaseContext dbContext) : base(dbContext) { }
 
+    // FIX PATCH BUG - NO CHANGES TO USER ID AND BOOK ID
+
     public override async Task<Loan?> GetById(Guid id)
     {
         if (_context.Loans is not null) return await _context.Loans
