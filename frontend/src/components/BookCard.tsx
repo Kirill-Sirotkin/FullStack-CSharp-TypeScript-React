@@ -68,14 +68,14 @@ const BookCard = (book: Book) => {
   return (
     <div key={book.id} className="items-grid-element">
       <img alt="book cover" src={bookCover} style={{width: "80px", height: "80px"}} />
-      <div style={{backgroundColor: "inherit"}}>
-          <input className="edit-input" defaultValue={book.title} onChange={(e) => setInputTitle(e.target.value)}></input>
-      </div>
-      <input className="edit-input" defaultValue={book.isbn} onChange={(e) => setInputIsbn(e.target.value)}></input>
+      <br/>
+      Title: <input className="edit-input" defaultValue={book.title} onChange={(e) => setInputTitle(e.target.value)}></input>
+      <br/>
+      ISBN: <input className="edit-input" defaultValue={book.isbn} onChange={(e) => setInputIsbn(e.target.value)}></input>
       <br/>
       By {book.authorNames[0]}{book.authorNames.length > 1 ? <span style={{backgroundColor: "inherit"}}>, et al</span> : null}
       <br/>
-      <input className="edit-input" defaultValue={book.quantity} onChange={(e) => setInputQuantity(parseInt(e.target.value))}></input>
+      Quantity: <input className="edit-input" defaultValue={book.quantity} onChange={(e) => setInputQuantity(parseInt(e.target.value))}></input>
       <div className="edit-buttons">
         <button style={{backgroundColor: "red"}} onClick={updateCancel}>CANCEL</button>
         <button style={{backgroundColor: "green"}} onClick={updateSave}>SAVE</button>

@@ -13,6 +13,7 @@ import Authentication from './pages/Authentication'
 import Profile from './pages/Profile'
 import Registration from './pages/Registration'
 import Users from './pages/Users'
+import Loans from './pages/Loans'
 
 const router = createBrowserRouter([
   {
@@ -56,10 +57,10 @@ const router = createBrowserRouter([
         path: "/users",
         element: <Users />,
       },
-      // {
-      //   path: "/loans",
-      //   element: <Loans />,
-      // },
+      {
+        path: "/loans",
+        element: <Loans />,
+      },
       ]
   },
 ])

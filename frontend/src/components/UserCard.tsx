@@ -1,4 +1,4 @@
-import bookCover from "./../media/cover_unavailable.png"
+import avatar from "./../media/avatar_placeholder.png";
 import { Link } from "react-router-dom";
 import useAppSelector from "../hooks/useAppSelector";
 import AdminButtons from "./AdminButtons";
@@ -44,7 +44,7 @@ const UserCard = (userInfo: User) => {
   
   if (!updateContextActive) return (
     <div key={userInfo.id} className="items-grid-element">
-      <img alt="book cover" src={bookCover} style={{width: "80px", height: "80px"}} />
+      <img alt="avatar" src={avatar} style={{width: "80px", height: "80px"}} />
       <div style={{backgroundColor: "inherit"}}>
           <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={`/profile/${userInfo.id}`}>
             {userInfo.firstName} {userInfo.lastName}
@@ -58,14 +58,19 @@ const UserCard = (userInfo: User) => {
 
   return (
     <div key={userInfo.id} className="items-grid-element">
-      <img alt="book cover" src={bookCover} style={{width: "80px", height: "80px"}} />
+      <img alt="avatar" src={avatar} style={{width: "80px", height: "80px"}} />
       <div style={{backgroundColor: "inherit"}}>
           <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={`/profile/${userInfo.id}`}>
             {userInfo.firstName} {userInfo.lastName}
           </Link>
       </div>
       <br/>
-      Role: {UserRoles[userInfo.role]}
+      Role: 
+        <select defaultValue={userInfo.role}>
+          <option value="0">{UserRoles[0]}</option>
+          <option value="1">{UserRoles[1]}</option>
+          <option value="2">{UserRoles[2]}</option>
+        </select>
       <div className="edit-buttons">
         <button style={{backgroundColor: "red"}} onClick={updateCancel}>CANCEL</button>
         <button style={{backgroundColor: "green"}} onClick={updateSave}>SAVE</button>
