@@ -12,6 +12,7 @@ import Author from './pages/Author'
 import Authentication from './pages/Authentication'
 import Profile from './pages/Profile'
 import Registration from './pages/Registration'
+import Users from './pages/Users'
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,14 @@ const router = createBrowserRouter([
         path: "/profile/:id",
         element: <Profile />,
       },
+      {
+        path: "/users",
+        element: <Users />,
+      },
+      // {
+      //   path: "/loans",
+      //   element: <Loans />,
+      // },
       ]
   },
 ])

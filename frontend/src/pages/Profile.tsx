@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAppSelector from "../hooks/useAppSelector";
 import useAppDispatch from "../hooks/useAppDispatch";
 import avatar from "./../media/avatar_placeholder.png";
 import { getUserById, logOutUser } from "../reducers/userReducer";
+import UserRoles from "../types/UserRoles";
 
 const Profile = () => {
     const {id} = useParams();
@@ -26,9 +27,19 @@ const Profile = () => {
         <div>
             <img alt="avatar" src={avatar} style={{width: "80px", height: "80px"}} />
             {user.currentUser.firstName} {user.currentUser.lastName}
-            <br></br>
-            Role: {user.currentUser.role}
-            <button style={{ padding: "10px 20px" }} onClick={logOut}>Log out</button>
+            <br/>
+            Role: {UserRoles[user.currentUser.role]}
+            <br/>
+            {user.currentUser.role === 0 ? 
+                <div>
+                    <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/users"}>Manage users</Link>
+                    <br/>
+                    <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/loans"}>Manage loans</Link>
+                </div>
+            : null}
+            {user.currentUser.id === id ? 
+                <button style={{ padding: "10px 20px" }} onClick={logOut}>Log out</button>
+            :null}
         </div>
     )
 }

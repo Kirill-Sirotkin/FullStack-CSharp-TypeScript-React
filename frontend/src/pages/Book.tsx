@@ -19,9 +19,9 @@ const Product = () => {
         <div>
             <img alt="book cover" src={bookCover} style={{width: "80px", height: "80px"}} />
             {books.bookById.title}
-            <br></br>
+            <br/>
             ISBN: {books.bookById.isbn}
-            <br></br>
+            <br/>
             By {books.bookById.authorNames.map((author, index) => 
                 <div key={books.bookById.authorIds[index]} style={{backgroundColor: "inherit"}}>
                     <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={`/authors/${books.bookById.authorIds[index]}`}>
@@ -29,9 +29,9 @@ const Product = () => {
                     </Link>
                 </div>
             )}
-            <br></br>
+            <br/>
             {books.bookById.description}
-            <br></br>
+            <br/>
             Available to borrow: {books.bookById.quantity}
         </div>
     )

@@ -35,8 +35,6 @@ const AuthorCard = (author: Author) => {
       bookIds: []
     }
     const token = localStorage.getItem("token");
-    console.log(token);
-    console.log(author.id);
     await dispatch(updateAuthor({author: authorUpdate, idAndToken: {id: author.id, token }}));
     dispatch(getAuthors());
   }

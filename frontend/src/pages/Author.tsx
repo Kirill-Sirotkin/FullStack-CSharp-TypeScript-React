@@ -19,9 +19,9 @@ const Author = () => {
         <div>
             <img alt="author avatar" src={avatar} style={{width: "80px", height: "80px"}} />
             {authors.authorById.firstName} {authors.authorById.lastName}
-            <br></br>
+            <br/>
             Biography: {authors.authorById.biography}
-            <br></br>
+            <br/>
             Books by this author: {authors.authorById.bookTitles.map((title, index) => 
                 <div key={authors.authorById.bookIds[index]} style={{backgroundColor: "inherit"}}>
                     <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={`/books/${authors.authorById.bookIds[index]}`}>

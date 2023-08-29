@@ -39,8 +39,6 @@ const BookCard = (book: Book) => {
       quantity: inputQuantity
     }
     const token = localStorage.getItem("token");
-    console.log(token);
-    console.log(book.id);
     await dispatch(updateBook({book: bookUpdate, idAndToken: {id: book.id, token }}));
     dispatch(getBooks());
   }
@@ -57,11 +55,11 @@ const BookCard = (book: Book) => {
             {book.title}
           </Link>
       </div>
-      <br></br>
+      <br/>
       ISBN: {book.isbn}
-      <br></br>
+      <br/>
       By {book.authorNames[0]}{book.authorNames.length > 1 ? <span style={{backgroundColor: "inherit"}}>, et al</span> : null}
-      <br></br>
+      <br/>
       Available to borrow: {book.quantity}
       <AdminButtons {...{user: user.currentUser, updateFunction: updateBookClick, deleteFunction: deleteBookClick, itemId: book.id}} />
     </div>
@@ -74,9 +72,9 @@ const BookCard = (book: Book) => {
           <input className="edit-input" defaultValue={book.title} onChange={(e) => setInputTitle(e.target.value)}></input>
       </div>
       <input className="edit-input" defaultValue={book.isbn} onChange={(e) => setInputIsbn(e.target.value)}></input>
-      <br></br>
+      <br/>
       By {book.authorNames[0]}{book.authorNames.length > 1 ? <span style={{backgroundColor: "inherit"}}>, et al</span> : null}
-      <br></br>
+      <br/>
       <input className="edit-input" defaultValue={book.quantity} onChange={(e) => setInputQuantity(parseInt(e.target.value))}></input>
       <div className="edit-buttons">
         <button style={{backgroundColor: "red"}} onClick={updateCancel}>CANCEL</button>

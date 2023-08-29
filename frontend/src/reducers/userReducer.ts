@@ -9,9 +9,11 @@ import IdAndToken from "../types/IdAndToken";
 interface UserReducer {
   token: string;
   currentUser: User;
+  users: User[];
   loading: boolean;
   errorMessageLogin: string;
   errorMessageRegister: string;
+  deleteSuccessful?: boolean;
 }
 
 const emptyUser: User = {
@@ -23,6 +25,7 @@ const emptyUser: User = {
 
 const initialState: UserReducer = {
   loading: false,
+  users: [],
   token: "",
   currentUser: emptyUser,
   errorMessageLogin: "",
@@ -64,10 +67,26 @@ const userSlice = createSlice({
     });
     build.addCase(getUserById.fulfilled, (state, action) => {
       if (action.payload instanceof AxiosError) {
-        state.errorMessageLogin = "Cannot authenticate";
+        console.log(action.payload);
       } else {
         state.currentUser = action.payload;
         state.errorMessageLogin = "";
+      }
+    });
+    build.addCase(getUsers.fulfilled, (state, action) => {
+      if (action.payload instanceof AxiosError) {
+        console.log(action.payload);
+      } else {
+        state.users = action.payload;
+        state.errorMessageLogin = "";
+      }
+    });
+    build.addCase(deleteUser.fulfilled, (state, action) => {
+      if (action.payload instanceof AxiosError) {
+        console.log(action.payload.message);
+        state.deleteSuccessful = false;
+      } else {
+        state.deleteSuccessful = true;
       }
     });
   },
@@ -105,6 +124,27 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const getUsers = createAsyncThunk(
+  "getUsers",
+  async (token?: string | null) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const result = await axios.get<User[]>(
+        "https://lirbarymanagementproject.azurewebsites.net/api/v1/Users",
+        config
+      );
+      return result.data;
+    } catch (e) {
+      const error = e as AxiosError;
+      return error;
+    }
+  }
+);
+
 export const getUserById = createAsyncThunk(
   "getUserById",
   async (credentials: IdAndToken) => {
@@ -116,6 +156,27 @@ export const getUserById = createAsyncThunk(
     try {
       const result = await axios.get<User>(
         `https://lirbarymanagementproject.azurewebsites.net/api/v1/Users/${credentials.id}`,
+        config
+      );
+      return result.data;
+    } catch (e) {
+      const error = e as AxiosError;
+      return error;
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "deleteUser",
+  async (idAndToken: IdAndToken) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${idAndToken.token}`,
+      },
+    };
+    try {
+      const result = await axios.delete<boolean>(
+        `https://lirbarymanagementproject.azurewebsites.net/api/v1/Users/${idAndToken.id}`,
         config
       );
       return result.data;
