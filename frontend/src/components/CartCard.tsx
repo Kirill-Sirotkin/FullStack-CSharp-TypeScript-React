@@ -15,9 +15,9 @@ const CartCard = (cartProduct: CartProduct) => {
           </Link>
       </div>
       <br/>
-      Available to borrow: {cartProduct.product.quantity}
+      ISBN: {cartProduct.product.isbn}
       <br/>
-      You want to borrow: {cartProduct.count}
+      Available to borrow: {cartProduct.product.quantity}
       <div className="edit-buttons">
         <button style={{backgroundColor: "red"}} onClick={() => dispatch(removeProductFromCart(cartProduct.product.id))}>Remove from cart</button>
       </div>

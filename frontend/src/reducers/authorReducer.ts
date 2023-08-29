@@ -42,14 +42,13 @@ const authorSlice = createSlice({
         state.authorById = action.payload;
       }
     });
-    // build.addCase(createProduct.fulfilled, (state, action) => {
-    //   if (action.payload instanceof AxiosError) {
-    //     console.log(action.payload.message);
-    //     state.createResultMessage = action.payload.message;
-    //   } else {
-    //     state.createdProduct = action.payload;
-    //   }
-    // });
+    build.addCase(createAuthor.fulfilled, (state, action) => {
+      if (action.payload instanceof AxiosError) {
+        console.log(action.payload.message);
+      } else {
+        console.log(action.payload);
+      }
+    });
     build.addCase(updateAuthor.fulfilled, (state, action) => {
       if (action.payload instanceof AxiosError) {
         console.log(action.payload.message);
@@ -96,21 +95,27 @@ export const getAuthorById = createAsyncThunk(
   }
 );
 
-// export const createProduct = createAsyncThunk(
-//   "createProduct",
-//   async (product: ProductCreateInfo) => {
-//     try {
-//       const result = await axios.post<Product>(
-//         "https://api.escuelajs.co/api/v1/products/",
-//         product
-//       );
-//       return result.data;
-//     } catch (e) {
-//       const error = e as AxiosError;
-//       return error;
-//     }
-//   }
-// );
+export const createAuthor = createAsyncThunk(
+  "createAuthor",
+  async (createInfo: { author: AuthorCreateUpdateInfo; token: string }) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${createInfo.token}`,
+      },
+    };
+    try {
+      const result = await axios.post<Author>(
+        "https://lirbarymanagementproject.azurewebsites.net/api/v1/Authors",
+        createInfo.author,
+        config
+      );
+      return result.data;
+    } catch (e) {
+      const error = e as AxiosError;
+      return error;
+    }
+  }
+);
 
 export const updateAuthor = createAsyncThunk(
   "updateAuthor",

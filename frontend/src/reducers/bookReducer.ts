@@ -44,14 +44,13 @@ const bookSlice = createSlice({
         state.bookById = action.payload;
       }
     });
-    // build.addCase(createProduct.fulfilled, (state, action) => {
-    //   if (action.payload instanceof AxiosError) {
-    //     console.log(action.payload.message);
-    //     state.createResultMessage = action.payload.message;
-    //   } else {
-    //     state.createdProduct = action.payload;
-    //   }
-    // });
+    build.addCase(createBook.fulfilled, (state, action) => {
+      if (action.payload instanceof AxiosError) {
+        console.log(action.payload.message);
+      } else {
+        console.log(action.payload);
+      }
+    });
     build.addCase(updateBook.fulfilled, (state, action) => {
       if (action.payload instanceof AxiosError) {
         console.log(action.payload.message);
@@ -98,21 +97,27 @@ export const getBookById = createAsyncThunk(
   }
 );
 
-// export const createProduct = createAsyncThunk(
-//   "createProduct",
-//   async (product: ProductCreateInfo) => {
-//     try {
-//       const result = await axios.post<Product>(
-//         "https://api.escuelajs.co/api/v1/products/",
-//         product
-//       );
-//       return result.data;
-//     } catch (e) {
-//       const error = e as AxiosError;
-//       return error;
-//     }
-//   }
-// );
+export const createBook = createAsyncThunk(
+  "createBook",
+  async (createInfo: { book: BookCreateUpdateInfo; token: string }) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${createInfo.token}`,
+      },
+    };
+    try {
+      const result = await axios.post<Book>(
+        "https://lirbarymanagementproject.azurewebsites.net/api/v1/Books",
+        createInfo.book,
+        config
+      );
+      return result.data;
+    } catch (e) {
+      const error = e as AxiosError;
+      return error;
+    }
+  }
+);
 
 export const updateBook = createAsyncThunk(
   "updateBook",

@@ -16,6 +16,8 @@ import Users from './pages/Users'
 import Loans from './pages/Loans'
 import Cart from './pages/Cart'
 import User from './pages/User'
+import BookCreate from './pages/BookCreate'
+import AuthorCreate from './pages/AuthorCreate'
 
 const router = createBrowserRouter([
   {
@@ -36,12 +38,20 @@ const router = createBrowserRouter([
         element: <Book />,
       },
       {
+        path: "/create/book",
+        element: <BookCreate />,
+      },
+      {
         path: "/authors",
         element: <Authors />,
       },
       {
         path: "/authors/:id",
         element: <Author />,
+      },
+      {
+        path: "/create/author",
+        element: <AuthorCreate />,
       },
       {
         path: "/auth",

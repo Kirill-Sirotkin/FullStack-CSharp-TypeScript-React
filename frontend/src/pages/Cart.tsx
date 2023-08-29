@@ -4,12 +4,13 @@ import CartCard from "../components/CartCard";
 import LoanCreateUpdateInfo from "../types/LoanCreateUpdateInfo";
 import useAppDispatch from "../hooks/useAppDispatch";
 import { createLoan } from "../reducers/loanReducer";
-import { getTotal } from "../reducers/cartReducer";
-import { Link } from "react-router-dom";
+import { clearCart, getTotal } from "../reducers/cartReducer";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const user = useAppSelector(state => state.userReducer);
     const cart = useAppSelector(state => state.cartReducer);
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     
     const cartCards = cart.products.map((book) => 
@@ -17,6 +18,7 @@ const Cart = () => {
     );
 
     const checkoutBooks = () => {
+        const loanRequests: any[] = [];
         cart.products.forEach((book) => {
             const today = new Date();
             const due = new Date(today.getDate() + 30);
@@ -27,8 +29,10 @@ const Cart = () => {
                 dueDate: due.toISOString(),
                 status: 0
             }
-            dispatch(createLoan({loan: newLoan, token: user.token}));
+            loanRequests.push(dispatch(createLoan({loan: newLoan, token: user.token})));
         });
+        Promise.all(loanRequests).then(() => navigate("/books"));
+        dispatch(clearCart());
     }
 
     return (
