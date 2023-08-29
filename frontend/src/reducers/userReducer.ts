@@ -4,6 +4,7 @@ import UserCreateInfo from "../types/UserCreateInfo";
 import UserCredentials from "../types/UserCredentials";
 import User from "../types/User";
 import axios, { AxiosError } from "axios";
+import IdAndToken from "../types/IdAndToken";
 
 interface UserReducer {
   token: string;
@@ -17,7 +18,7 @@ const emptyUser: User = {
   id: "",
   firstName: "",
   lastName: "",
-  role: "",
+  role: -1,
 };
 
 const initialState: UserReducer = {
@@ -27,11 +28,6 @@ const initialState: UserReducer = {
   errorMessageLogin: "",
   errorMessageRegister: "",
 };
-
-interface UserFetchPayload {
-  token?: string | null;
-  id?: string | null;
-}
 
 const userSlice = createSlice({
   name: "user",
@@ -44,7 +40,7 @@ const userSlice = createSlice({
       state.errorMessageRegister = "";
     },
     promoteToAdmin: (state) => {
-      if (state.currentUser) state.currentUser.role = "admin";
+      if (state.currentUser) state.currentUser.role = 0;
     },
   },
   extraReducers: (build) => {
@@ -111,7 +107,7 @@ export const loginUser = createAsyncThunk(
 
 export const getUserById = createAsyncThunk(
   "getUserById",
-  async (credentials: UserFetchPayload) => {
+  async (credentials: IdAndToken) => {
     const config = {
       headers: {
         Authorization: `Bearer ${credentials.token}`,
