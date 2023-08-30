@@ -9,7 +9,14 @@ public class BookRepository : BaseRepository<Book>, IBookRepository
 
     public override async Task<IEnumerable<Book>> GetAll(QueryOptions options)
     {
-        if (_context.Books is not null) return await _context.Books.Include(b => b.Authors).ToArrayAsync();
+        if (_context.Books is not null)
+        {
+            var collection = await _context.Books.Include(b => b.Authors).ToArrayAsync();
+            if (options.SearchWord != string.Empty)
+                collection =
+                    collection.Where(obj => obj.Title.Contains(options.SearchWord.Trim(), StringComparison.OrdinalIgnoreCase)).ToArray();
+            return GetCollectionWithOptions(options, collection);
+        }
         return Array.Empty<Book>();
     }
 
