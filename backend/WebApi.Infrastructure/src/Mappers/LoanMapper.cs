@@ -15,8 +15,8 @@ public class LoanMapper : ILoanMapper
 
     public Loan MapFromCreate(LoanCreateUpdateDto entityCreate)
     {
-        if (_context.Users is null) throw new Exception("Users table is null");
-        if (_context.Books is null) throw new Exception("Users table is null");
+        if (_context.Users is null) throw CustomException.DatabaseException("Users table is null");
+        if (_context.Books is null) throw CustomException.DatabaseException("Books table is null");
         var result = new Loan
         {
             Id = Guid.NewGuid(),
@@ -32,8 +32,8 @@ public class LoanMapper : ILoanMapper
 
     public Loan MapFromUpdate(Loan previousEntity, LoanCreateUpdateDto entityUpdate)
     {
-        if (_context.Users is null) throw new Exception("Users table is null");
-        if (_context.Books is null) throw new Exception("Users table is null");
+        if (_context.Users is null) throw CustomException.DatabaseException("Users table is null");
+        if (_context.Books is null) throw CustomException.DatabaseException("Books table is null");
         var result = new Loan
         {
             Id = previousEntity.Id,

@@ -23,9 +23,9 @@ public class AuthService : IAuthService
     public async Task<string> VerifyCredentials(UserCredentialsDto credentials)
     {
         var user = await _userRepository.GetByEmail(credentials.Email);
-        if (user is null) throw new Exception("No user was found");
+        if (user is null) throw CustomException.NotFoundException("No user was found with that Email");
         var authSuccess = PasswordService.VerifyPassword(credentials.Password, user.PasswordHash, user.PasswordSalt);
-        if (!authSuccess) throw new Exception("Authentication failed");
+        if (!authSuccess) throw CustomException.AuthenticationException("Could not verify credentials");
         return CreateToken(user);
     }
 
@@ -40,7 +40,7 @@ public class AuthService : IAuthService
             new Claim(ClaimTypes.Role, user.UserRole.ToString()),
         };
         var jwtSecret = _configuration["JwtSecret"];
-        if (jwtSecret is null) throw new Exception("No secret was found in appsettings");
+        if (jwtSecret is null) throw new CustomException(500, "No secret was found in appsettings");
         var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSecret));
         var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
         var securityTokenDescriptor = new SecurityTokenDescriptor
@@ -51,7 +51,7 @@ public class AuthService : IAuthService
             SigningCredentials = signingCredentials
         };
         var token = jwtSecurityTokenHandler.CreateJwtSecurityToken(securityTokenDescriptor);
-        if (token is null) throw new Exception("No token was returned");
+        if (token is null) throw new CustomException(500, "No token was returned");
         return token.RawData;
     }
 }

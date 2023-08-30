@@ -33,14 +33,14 @@ public class BaseService<T, TReadDto, TCreateDto, TUpdateDto> : IBaseService<T, 
     public async Task<TReadDto> GetById(Guid id)
     {
         var result = await _baseRepository.GetById(id);
-        if (result is null) throw new Exception("Get by id: User not found");
+        if (result is null) throw CustomException.NotFoundException("Get by ID: User was not found with that ID");
         return _mapper.MapToRead(result);
     }
 
     public async Task<TReadDto> Update(Guid id, TUpdateDto updated)
     {
         var previousEntity = await _baseRepository.GetById(id);
-        if (previousEntity is null) throw new Exception("Update: User not found");
+        if (previousEntity is null) throw CustomException.NotFoundException("Update: User was not found with that ID");
         var newUserInfo = _mapper.MapFromUpdate(previousEntity, updated);
         await _baseRepository.Update(newUserInfo);
         return _mapper.MapToRead(newUserInfo);

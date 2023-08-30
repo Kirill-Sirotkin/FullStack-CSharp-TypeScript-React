@@ -15,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DatabaseContext>(o => o.EnableSensitiveDataLogging());
 
 builder.Services
+    .AddSingleton<ErrorHandlerMiddleware>()
     .AddScoped<IAuthService, AuthService>()
     .AddScoped<IUserMapper, UserMapper>()
     .AddScoped<IUserRepository, UserRepository>()
@@ -48,7 +49,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var jwtSecret = builder.Configuration.GetValue<string>("JwtSecret");
-if (jwtSecret is null) throw new Exception("No secret was found in appsettings");
+if (jwtSecret is null) throw new CustomException(500, "No secret was found in appsettings");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -79,6 +80,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseCors(builder => builder
     .AllowAnyOrigin()

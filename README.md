@@ -58,7 +58,7 @@ Mandatory features are implemented both in an API backend, and in a more user-fr
 ## Requirements
 
 1. ✅ Apply CLEAN architecture in your backend. In README file, explain the architecture of your project as well.
-2. ⏳ (**in progress**) Implement Error Handling Middleware: This will ensure any exceptions thrown in your application are handled appropriately and helpful error messages are returned.
+2. ✅ Implement Error Handling Middleware: This will ensure any exceptions thrown in your application are handled appropriately and helpful error messages are returned.
 3. ✅ Document with Swagger: Make sure to annotate your API endpoints and generate a Swagger UI for easier testing and documentation.
 4. ✅ Project should have proper file structure, naming convention, and comply with Rest API.
 5. ✅ `README` file should sufficiently describe the project, as well as the deployment.
@@ -79,7 +79,10 @@ Mandatory features are implemented both in an API backend, and in a more user-fr
 
 ### Testing
 
-**in progress**
+Added a few unit tests in:
+
+1. Backend: testing custom UserMapper via XUnit.
+2. Frontend: testing cartReducer via Jest.
 
 ### Areas for Improvement
 

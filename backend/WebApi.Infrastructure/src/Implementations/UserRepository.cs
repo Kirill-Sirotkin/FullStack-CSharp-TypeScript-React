@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Core;
+using WebApi.Service;
 
 namespace WebApi.Infrastructure;
 
@@ -9,7 +10,7 @@ public class UserRepository : BaseRepository<User>, IUserRepository
 
     public UserRepository(DatabaseContext dbContext) : base(dbContext)
     {
-        if (dbContext.Users is null) throw new Exception("Users table is null");
+        if (dbContext.Users is null) throw new CustomException(500, "Users table is null");
         _users = dbContext.Users;
     }
 

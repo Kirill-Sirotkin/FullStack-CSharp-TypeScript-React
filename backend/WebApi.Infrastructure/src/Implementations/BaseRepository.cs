@@ -81,9 +81,6 @@ public class BaseRepository<T> : IRepository<T> where T : IdBase
         if (sliceEnd >= collection.Count()) sliceEnd = collection.Count() - 1;
         if (sliceStart > sliceEnd) sliceStart = sliceEnd;
 
-        Console.WriteLine($"START: {sliceStart}");
-        Console.WriteLine($"END: {sliceEnd}");
-
         return collection.Skip(sliceStart).Take(sliceEnd - sliceStart + 1);
     }
 }
