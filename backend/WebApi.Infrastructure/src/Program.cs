@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<DatabaseContext>();
+builder.Services.AddDbContext<DatabaseContext>(o => o.EnableSensitiveDataLogging());
 
 builder.Services
     .AddScoped<IAuthService, AuthService>()

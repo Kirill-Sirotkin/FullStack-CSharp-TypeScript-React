@@ -13,13 +13,13 @@ const LoanCard = (loan: Loan) => {
   const dispatch = useAppDispatch();
   const [updateContextActive, setUpdateContextActive] = useState(false);
   const [inputStatus, setInputStatus] = useState(0);
-  const [inputDue, setInputDue] = useState("");
-  const [inputReturned, setInputReturned] = useState<string | undefined>("");
+  const [inputDue, setInputDue] = useState<Date>(new Date());
+  const [inputReturned, setInputReturned] = useState<Date | undefined>(undefined);
 
   const updateBookClick = (id: string) => {
     setInputStatus(loan.status);
-    setInputDue(loan.dueDate);
-    setInputReturned(loan.returnedDate);
+    setInputDue(new Date(loan.dueDate));
+    setInputReturned(loan.returnedDate ? new Date(loan.returnedDate) : undefined);
     setUpdateContextActive(true);
   }
 
@@ -34,9 +34,9 @@ const LoanCard = (loan: Loan) => {
       userId: loan.userId,
       bookId: loan.bookId,
       takenDate: loan.takenDate,
-      dueDate: inputDue,
+      dueDate: inputDue.toISOString(),
       status: inputStatus,
-      returnedDate: inputReturned
+      returnedDate: inputReturned?.toISOString()
     }
     const token = localStorage.getItem("token");
     await dispatch(updateLoan({loan: loanUpdate, idAndToken: {id: loan.id, token }}));
@@ -72,7 +72,7 @@ const LoanCard = (loan: Loan) => {
       book: <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={`/books/${loan.bookId}`}> {loan.bookId}</Link>
       <br/>
       Status: 
-        <select defaultValue={loan.status}>
+        <select defaultValue={loan.status} onChange={(e) => setInputStatus(parseInt(e.target.value))}>
           <option value="0">{LoanStatuses[0]}</option>
           <option value="1">{LoanStatuses[1]}</option>
           <option value="2">{LoanStatuses[2]}</option>
@@ -80,9 +80,9 @@ const LoanCard = (loan: Loan) => {
       <br/>
       Taken on: {loan.takenDate}
       <br/>
-      Due: <input className="edit-input" type="date" defaultValue={loan.dueDate} />
+      Due: <input className="edit-input" type="date" defaultValue={loan.dueDate} onChange={(e) => setInputDue(new Date(e.target.value))} />
       <br/>
-      Returned: <input className="edit-input" type="date" defaultValue={loan.returnedDate ? loan.returnedDate : new Date().toUTCString()} />
+      Returned: <input className="edit-input" type="date" defaultValue={loan.returnedDate ? loan.returnedDate : new Date().toUTCString()} onChange={(e) => setInputReturned(new Date(e.target.value))} />
       <div className="edit-buttons">
         <button style={{backgroundColor: "red"}} onClick={updateCancel}>CANCEL</button>
         <button style={{backgroundColor: "green"}} onClick={updateSave}>SAVE</button>

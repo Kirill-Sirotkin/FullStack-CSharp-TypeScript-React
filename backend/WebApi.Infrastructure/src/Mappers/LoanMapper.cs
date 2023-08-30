@@ -20,8 +20,8 @@ public class LoanMapper : ILoanMapper
         var result = new Loan
         {
             Id = Guid.NewGuid(),
-            User = _context.Users.First(u => u.Id == entityCreate.UserId),
-            Book = _context.Books.First(b => b.Id == entityCreate.BookId),
+            User = _context.Users.AsNoTracking().First(u => u.Id == entityCreate.UserId),
+            Book = _context.Books.AsNoTracking().First(b => b.Id == entityCreate.BookId),
             TakenDate = entityCreate.TakenDate,
             DueDate = entityCreate.DueDate,
             ReturnedDate = entityCreate.ReturnedDate,
@@ -37,8 +37,8 @@ public class LoanMapper : ILoanMapper
         var result = new Loan
         {
             Id = previousEntity.Id,
-            User = _context.Users.First(u => u.Id == entityUpdate.UserId),
-            Book = _context.Books.First(b => b.Id == entityUpdate.BookId),
+            User = _context.Users.AsNoTracking().First(u => u.Id == entityUpdate.UserId),
+            Book = _context.Books.AsNoTracking().First(b => b.Id == entityUpdate.BookId),
             TakenDate = entityUpdate.TakenDate,
             DueDate = entityUpdate.DueDate,
             ReturnedDate = entityUpdate.ReturnedDate,

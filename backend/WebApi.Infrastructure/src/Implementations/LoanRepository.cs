@@ -12,6 +12,7 @@ public class LoanRepository : BaseRepository<Loan>, ILoanRepository
     public override async Task<Loan?> GetById(Guid id)
     {
         if (_context.Loans is not null) return await _context.Loans
+            .AsNoTracking()
             .Include(l => l.User)
             .Include(l => l.Book)
             .FirstOrDefaultAsync(l => l.Id == id);

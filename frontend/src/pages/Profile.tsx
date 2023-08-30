@@ -37,6 +37,10 @@ const Profile = () => {
                     <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/users"}>Manage users</Link>
                     <br/>
                     <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/loans"}>Manage loans</Link>
+                </div>
+            : null}
+            {(user.currentUser.role === 0 || user.currentUser.role === 1) ? 
+                <div>
                     <br/>
                     <Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/create/book"}>Create book</Link>
                     <br/>

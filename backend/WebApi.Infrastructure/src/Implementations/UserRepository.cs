@@ -22,6 +22,6 @@ public class UserRepository : BaseRepository<User>, IUserRepository
 
     public async Task<User?> GetByEmail(string email)
     {
-        return await _users.FirstOrDefaultAsync(u => u.Email == email);
+        return await _users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
     }
 }
