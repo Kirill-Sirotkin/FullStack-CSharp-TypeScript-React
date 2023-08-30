@@ -42,6 +42,7 @@ const BookCard = (book: Book) => {
     const token = localStorage.getItem("token");
     await dispatch(updateBook({book: bookUpdate, idAndToken: {id: book.id, token }}));
     dispatch(getBooks());
+    setUpdateContextActive(false);
   }
 
   const updateCancel = () => {

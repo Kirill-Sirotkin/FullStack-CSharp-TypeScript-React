@@ -41,6 +41,7 @@ const LoanCard = (loan: Loan) => {
     const token = localStorage.getItem("token");
     await dispatch(updateLoan({loan: loanUpdate, idAndToken: {id: loan.id, token }}));
     dispatch(getLoans(token));
+    setUpdateContextActive(false);
   }
 
   const updateCancel = () => {

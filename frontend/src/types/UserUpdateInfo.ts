@@ -1,6 +1,6 @@
 interface UserUpdateInfo {
   firstName: string;
   lastName: string;
-  password: string;
+  role: number;
 }
 export default UserUpdateInfo;

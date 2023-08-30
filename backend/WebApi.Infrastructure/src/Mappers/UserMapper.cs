@@ -35,16 +35,15 @@ public class UserMapper : IUserMapper
 
     public User MapFromUpdate(User previousUser, UserUpdateDto userUpdate)
     {
-        (string hashedPassword, byte[] salt) = PasswordService.HashPassword(userUpdate.Password);
         return new User
         {
             Id = previousUser.Id,
             FirstName = userUpdate.FirstName,
             LastName = userUpdate.LastName,
             Email = previousUser.Email,
-            UserRole = previousUser.UserRole,
-            PasswordHash = hashedPassword,
-            PasswordSalt = salt
+            UserRole = userUpdate.Role,
+            PasswordHash = previousUser.PasswordHash,
+            PasswordSalt = previousUser.PasswordSalt
         };
     }
 }

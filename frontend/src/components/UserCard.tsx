@@ -7,7 +7,7 @@ import { useState } from "react";
 import User from "../types/User";
 import UserRoles from "../types/UserRoles";
 import UserUpdateInfo from "../types/UserUpdateInfo";
-import { deleteUser, getUsers } from "../reducers/userReducer";
+import { deleteUser, getUsers, updateUser } from "../reducers/userReducer";
 
 const UserCard = (userInfo: User) => {
   const user = useAppSelector(state => state.userReducer);
@@ -30,12 +30,12 @@ const UserCard = (userInfo: User) => {
     const userUpdate: UserUpdateInfo = {
       firstName: userInfo.firstName,
       lastName: userInfo.lastName,
-      password: ""
-      // add backend endpoint / funtion to change role
+      role: inputRole
     }
     const token = localStorage.getItem("token");
-    // await dispatch(updateUser({user: userUpdate, idAndToken: {id: userInfo.id, token }}));
+    await dispatch(updateUser({user: userUpdate, idAndToken: {id: userInfo.id, token }}));
     dispatch(getUsers(token));
+    setUpdateContextActive(false);
   }
 
   const updateCancel = () => {
@@ -66,8 +66,8 @@ const UserCard = (userInfo: User) => {
       </div>
       <br/>
       Role: 
-        <select defaultValue={userInfo.role}>
-          <option value="0">{UserRoles[0]}</option>
+        <select defaultValue={userInfo.role} onChange={(e) => setInputRole(parseInt(e.target.value))}>
+          <option value="0" >{UserRoles[0]}</option>
           <option value="1">{UserRoles[1]}</option>
           <option value="2">{UserRoles[2]}</option>
         </select>

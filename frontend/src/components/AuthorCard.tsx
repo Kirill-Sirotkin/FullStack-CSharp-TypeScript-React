@@ -37,6 +37,7 @@ const AuthorCard = (author: Author) => {
     const token = localStorage.getItem("token");
     await dispatch(updateAuthor({author: authorUpdate, idAndToken: {id: author.id, token }}));
     dispatch(getAuthors());
+    setUpdateContextActive(false);
   }
 
   const updateCancel = () => {

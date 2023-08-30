@@ -23,7 +23,7 @@ public class UserUpdateDto
 {
     public required string FirstName { get; init; }
     public required string LastName { get; init; }
-    public required string Password { get; init; }
+    public required Role Role { get; init; }
 }
 
 public class UserCredentialsDto

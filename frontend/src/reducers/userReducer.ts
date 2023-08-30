@@ -5,6 +5,7 @@ import UserCredentials from "../types/UserCredentials";
 import User from "../types/User";
 import axios, { AxiosError } from "axios";
 import IdAndToken from "../types/IdAndToken";
+import UserUpdateInfo from "../types/UserUpdateInfo";
 
 interface UserReducer {
   token: string;
@@ -89,6 +90,13 @@ const userSlice = createSlice({
       } else {
         state.users = action.payload;
         state.errorMessageLogin = "";
+      }
+    });
+    build.addCase(updateUser.fulfilled, (state, action) => {
+      if (action.payload instanceof AxiosError) {
+        console.log(action.payload.message);
+      } else {
+        console.log(action.payload);
       }
     });
     build.addCase(deleteUser.fulfilled, (state, action) => {
@@ -187,6 +195,28 @@ export const getUserViewableById = createAsyncThunk(
     try {
       const result = await axios.get<User>(
         `https://lirbarymanagementproject.azurewebsites.net/api/v1/Users/${credentials.id}`,
+        config
+      );
+      return result.data;
+    } catch (e) {
+      const error = e as AxiosError;
+      return error;
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "updateUser",
+  async (updateInfo: { user: UserUpdateInfo; idAndToken: IdAndToken }) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${updateInfo.idAndToken.token}`,
+      },
+    };
+    try {
+      const result = await axios.patch<User>(
+        `https://lirbarymanagementproject.azurewebsites.net/api/v1/Users/${updateInfo.idAndToken.id}`,
+        updateInfo.user,
         config
       );
       return result.data;
