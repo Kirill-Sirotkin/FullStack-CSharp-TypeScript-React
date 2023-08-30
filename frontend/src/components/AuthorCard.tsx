@@ -24,7 +24,7 @@ const AuthorCard = (author: Author) => {
   const deleteAuthorClick = async (id: string) => {
     const token = localStorage.getItem("token");
     await dispatch(deleteAuthor({id, token}));
-    dispatch(getAuthors());
+    dispatch(getAuthors("PageNumber=1&PerPage=6"));
   }
 
   const updateSave = async () => {
@@ -36,7 +36,7 @@ const AuthorCard = (author: Author) => {
     }
     const token = localStorage.getItem("token");
     await dispatch(updateAuthor({author: authorUpdate, idAndToken: {id: author.id, token }}));
-    dispatch(getAuthors());
+    dispatch(getAuthors("PageNumber=1&PerPage=6"));
     setUpdateContextActive(false);
   }
 

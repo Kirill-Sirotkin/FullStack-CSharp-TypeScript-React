@@ -68,17 +68,22 @@ const authorSlice = createSlice({
   },
 });
 
-export const getAuthors = createAsyncThunk("getAuthors", async () => {
-  try {
-    const result = await axios.get<Author[]>(
-      "https://lirbarymanagementproject.azurewebsites.net/api/v1/Authors"
-    );
-    return result.data;
-  } catch (e) {
-    const error = e as AxiosError;
-    return error;
+export const getAuthors = createAsyncThunk(
+  "getAuthors",
+  async (params: string) => {
+    try {
+      const result = await axios.get<Author[]>(
+        `https://lirbarymanagementproject.azurewebsites.net/api/v1/Authors${
+          params !== "" ? `?${params}` : ""
+        }`
+      );
+      return result.data;
+    } catch (e) {
+      const error = e as AxiosError;
+      return error;
+    }
   }
-});
+);
 
 export const getAuthorById = createAsyncThunk(
   "getAuthorById",

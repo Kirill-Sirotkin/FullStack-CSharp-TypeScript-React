@@ -70,10 +70,12 @@ const bookSlice = createSlice({
   },
 });
 
-export const getBooks = createAsyncThunk("getBooks", async () => {
+export const getBooks = createAsyncThunk("getBooks", async (params: string) => {
   try {
     const result = await axios.get<Book[]>(
-      "https://lirbarymanagementproject.azurewebsites.net/api/v1/Books"
+      `https://lirbarymanagementproject.azurewebsites.net/api/v1/Books${
+        params !== "" ? `?${params}` : ""
+      }`
     );
     return result.data;
   } catch (e) {
