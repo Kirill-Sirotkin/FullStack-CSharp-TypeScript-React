@@ -27,7 +27,7 @@ const BookCard = (book: Book) => {
   const deleteBookClick = async (id: string) => {
     const token = localStorage.getItem("token");
     await dispatch(deleteBook({id, token}));
-    dispatch(getBooks("PageNumber=1&PerPage=6"));
+    dispatch(getBooks("PageNumber=1"));
   }
 
   const updateSave = async () => {
@@ -41,7 +41,7 @@ const BookCard = (book: Book) => {
     }
     const token = localStorage.getItem("token");
     await dispatch(updateBook({book: bookUpdate, idAndToken: {id: book.id, token }}));
-    dispatch(getBooks("PageNumber=1&PerPage=6"));
+    dispatch(getBooks("PageNumber=1"));
     setUpdateContextActive(false);
   }
 

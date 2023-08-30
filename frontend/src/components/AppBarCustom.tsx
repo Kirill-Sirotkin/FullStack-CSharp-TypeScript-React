@@ -12,8 +12,8 @@ const SideBar = ({sideBarActive, setSideBarActive}: Props) => {
   if (sideBarActive) return (
     <div className="side-bar">
       <div style={{backgroundColor: "inherit"}}><Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/"} onClick={() => setSideBarActive(!sideBarActive)}>Home</Link></div>
-      <div style={{backgroundColor: "inherit"}}><Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/books?PageNumber=1&PerPage=6"} onClick={() => setSideBarActive(!sideBarActive)}>Books</Link></div>
-      <div style={{backgroundColor: "inherit"}}><Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/authors?PageNumber=1&PerPage=6"} onClick={() => setSideBarActive(!sideBarActive)}>Authors</Link></div>
+      <div style={{backgroundColor: "inherit"}}><Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/books?PageNumber=1"} onClick={() => setSideBarActive(!sideBarActive)}>Books</Link></div>
+      <div style={{backgroundColor: "inherit"}}><Link className="button-highlight" style={{backgroundColor: "inherit"}} to={"/authors?PageNumber=1"} onClick={() => setSideBarActive(!sideBarActive)}>Authors</Link></div>
     </div>
   )
   return (null)
